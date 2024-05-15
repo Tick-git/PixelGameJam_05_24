@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class EnemyGlobalSpawnManager : MonoBehaviour
@@ -101,8 +102,16 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
 
     private Vector2 GetGroupSpawnPosition()
     {
-        float xDir = _playerController.MovementVector.x;
-        return (Vector2) _playerController.transform.position + new Vector2(Random.Range(xDir * 1, xDir * 6), Random.Range(-4, 4));
+        Vector2 playerMovementVector = _playerController.MovementVector;
+
+        if(playerMovementVector == Vector2.zero)
+        {
+            playerMovementVector = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1));
+        }
+
+        Vector2 nextSpawnPos = Quaternion.Euler(0, 0, Random.Range(-45, 45)) * playerMovementVector * Random.Range(2, 6);
+
+        return (Vector2) _playerController.transform.position + nextSpawnPos;
     }
 
     private List<GameObject> GetInactiveEnemies(int groupSize)
