@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
 
     Vector2 _movementVector;
 
+    public Vector2 MovementVector { get => _movementVector; set => _movementVector = value; }
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -23,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        _movementVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        MovementVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         if (Input.GetButton("Fire1") && _attackCooldown <= 0)
         {
@@ -45,12 +47,12 @@ public class PlayerController : MonoBehaviour
             _colllider2D.enabled = false;
         }
 
-        _animator.SetFloat("FacingDirection", _movementVector.x);
+        _animator.SetFloat("FacingDirection", MovementVector.x);
         _attackCooldown -= Time.deltaTime;
     }
 
     void FixedUpdate()
     {
-        _rigidbody.MovePosition(_rigidbody.position + _movementVector * _playerStats.Speed * Time.fixedDeltaTime);
+        _rigidbody.MovePosition(_rigidbody.position + MovementVector * _playerStats.Speed * Time.fixedDeltaTime);
     }
 }

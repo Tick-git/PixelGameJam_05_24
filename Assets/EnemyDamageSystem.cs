@@ -1,18 +1,38 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyDamageSystem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Transform _target;
+
+    SteeringBehaviorBase _steeringBehaviorBase;
+
+    Rigidbody2D _rb;
+    private Coroutine _coroutine;
+
+    private void Start()
     {
-        
+        _target = GetComponent<EnemyTargetBehavior>().Target;
+        _steeringBehaviorBase = GetComponent<SteeringBehaviorBase>();
+        _rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if(_coroutine == null && Vector2.Distance(transform.position, _target.position) <= 0.11f)
+        {
+            _target.GetComponent<IDamageable>().TakeDamage(10, transform.position);
+            _steeringBehaviorBase.enabled = false;
+            _rb.velocity = Vector2.zero;
+            _coroutine = StartCoroutine(EnableSteering());
+        }
+    }
+
+    private IEnumerator EnableSteering()
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        _steeringBehaviorBase.enabled = true;
+        _coroutine = null;
     }
 }

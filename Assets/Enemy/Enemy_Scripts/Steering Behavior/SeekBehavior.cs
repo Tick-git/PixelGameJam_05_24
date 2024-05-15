@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class SeekBehavior : Steering
 {
-    public Transform target;
-    public float maxSpeed = 5f;
-    [SerializeField] float _threshold = 0.1f;
+    [SerializeField] float maxSpeed = 5f;
+    
+    Transform target;
+    float _threshold = 0.1f;
 
     private void Start()
     {

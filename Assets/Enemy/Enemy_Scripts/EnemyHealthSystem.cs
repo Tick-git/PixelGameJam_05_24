@@ -11,7 +11,7 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable
 
     SpriteRenderer _spriteRenderer;
 
-    EnemySpawnManager _enemySpawnManager;
+    EnemyGlobalSpawnManager _enemySpawnManager;
 
     SteeringBehaviorBase _steeringBehaviorBase;
 
@@ -26,12 +26,19 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        _enemySpawnManager = FindObjectOfType<EnemySpawnManager>();
+        _enemySpawnManager = FindObjectOfType<EnemyGlobalSpawnManager>();
+
+        if (_enemySpawnManager == null)
+            throw new NullReferenceException("EnemyGlobalSpawnManager not found");
+
         _currentHealth = _maxHealth;
     }
 
     public void TakeDamage(int damage, Vector3 origin)
     {
+        if(enabled == false)
+            return;
+
         StopAllCoroutines();
 
         _currentHealth -= damage;

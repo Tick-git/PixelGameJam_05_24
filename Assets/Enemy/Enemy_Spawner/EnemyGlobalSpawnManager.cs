@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class EnemySpawnManager : MonoBehaviour
+public class EnemyGlobalSpawnManager : MonoBehaviour
 {
     [SerializeField] GameObject _enemyEasyPrefab;
     [SerializeField] GameObject _enemyFastPrefab;
@@ -13,6 +13,8 @@ public class EnemySpawnManager : MonoBehaviour
     Vector2 _inactivePosition;
 
     Queue<GameObject> _inactiveEnemies;
+
+    PlayerController _playerController;
 
     private void Awake()
     {
@@ -34,6 +36,8 @@ public class EnemySpawnManager : MonoBehaviour
                 InstantiateEasyEnemy();
             }
         }
+
+        _playerController = FindObjectOfType<PlayerController>();
     }
 
     IEnumerator Start()
@@ -95,9 +99,10 @@ public class EnemySpawnManager : MonoBehaviour
         return spawnPositions.ToList();
     }
 
-    private static Vector2 GetGroupSpawnPosition()
+    private Vector2 GetGroupSpawnPosition()
     {
-        return new Vector2(Random.Range(-10, 10), Random.Range(-5, 5));
+        float xDir = _playerController.MovementVector.x;
+        return (Vector2) _playerController.transform.position + new Vector2(Random.Range(xDir * 1, xDir * 6), Random.Range(-4, 4));
     }
 
     private List<GameObject> GetInactiveEnemies(int groupSize)
