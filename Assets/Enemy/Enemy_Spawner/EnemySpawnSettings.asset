@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 169bcc348c3ff8242a3d226ca8081105, type: 3}
-  m_Name: PlayerStats
+  m_Script: {fileID: 11500000, guid: 631c29bdca06ecc47b1a0842c412d9ef, type: 3}
+  m_Name: EnemySpawnSettings
   m_EditorClassIdentifier: 
-  Speed: 1.25
-  Health: 0
-  AttackCooldown: 1
+  EnemyStartCount: 50
+  MaxEnemieCount: 200
+  SpawnIntervalMultiplier: 5
+  SpawnDifficultyMultiplier: 2

@@ -10,8 +10,9 @@ public class PlayerController : MonoBehaviour
     Animator _animator;
     Collider2D _colllider2D;
     
+    float _attackCooldown;
+
     Vector2 _movementVector;
-    bool _attack;
 
     private void Awake()
     {
@@ -24,8 +25,9 @@ public class PlayerController : MonoBehaviour
     {
         _movementVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1") && _attackCooldown <= 0)
         {
+            _attackCooldown = _playerStats.AttackCooldown;
             List<Collider2D> colliders = new List<Collider2D>();
             _colllider2D.enabled = true;
             _colllider2D.OverlapCollider(new ContactFilter2D() { useTriggers = true, useLayerMask = true, layerMask = _layerMask}, colliders);
@@ -37,13 +39,14 @@ public class PlayerController : MonoBehaviour
                     enemy.TakeDamage(10, transform.position);
                 }
             }
-        }
+        } 
         else
         {
-            _colllider2D.enabled = false;   
+            _colllider2D.enabled = false;
         }
 
         _animator.SetFloat("FacingDirection", _movementVector.x);
+        _attackCooldown -= Time.deltaTime;
     }
 
     void FixedUpdate()

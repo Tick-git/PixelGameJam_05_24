@@ -104,7 +104,7 @@ MonoBehaviour:
   _playerStats: {fileID: 11400000, guid: 6d4faa9894e7e304c8cfdabbc0dd337f, type: 2}
   _layerMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1536
 --- !u!50 &6429807180628449957
 Rigidbody2D:
   serializedVersion: 4

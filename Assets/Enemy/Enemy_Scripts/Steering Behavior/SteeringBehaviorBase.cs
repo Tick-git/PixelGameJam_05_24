@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,7 @@ public class SteeringBehaviorBase : MonoBehaviour
     void FixedUpdate()
     {
         Vector3 accelaration = Vector3.zero;
+        _rb.velocity = Vector3.zero;
 
         foreach (Steering behavior in steerings)
         {
@@ -35,6 +37,11 @@ public class SteeringBehaviorBase : MonoBehaviour
             accelaration *= maxAcceleration;
         }
 
-        _rb.AddForce(accelaration);
+        _rb.AddForce(accelaration, ForceMode2D.Impulse);
+    }
+
+    internal Vector2 GetCurrentVelocity()
+    {
+        return _rb.velocity;
     }
 }
