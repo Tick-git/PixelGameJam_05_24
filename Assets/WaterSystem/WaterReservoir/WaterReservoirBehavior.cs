@@ -19,7 +19,7 @@ public class WaterReservoirBehavior : MonoBehaviour, IWaterReservoir
     {
         float newWaterAmount = _waterReservoir.GetWater(waterAmount);
 
-        OnWaterStatusChanged?.Invoke(newWaterAmount);
+        OnWaterStatusChanged?.Invoke(_waterReservoir.GetWaterStatus());
 
         return newWaterAmount;
     }

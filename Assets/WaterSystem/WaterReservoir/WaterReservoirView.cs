@@ -10,8 +10,13 @@ public class WaterReservoirView : MonoBehaviour
         _waterReservoir.OnWaterStatusChanged += OnWaterStatusChanged;
     }
 
+    private void OnDestroy()
+    {
+        _waterReservoir.OnWaterStatusChanged -= OnWaterStatusChanged;
+    }
+
     private void OnWaterStatusChanged(float newStatus)
     {
-        Debug.Log("Player Water: " + newStatus);
+        Debug.Log($"{TransformHelper.FindRootTransform(transform).name} Waterstatus: {newStatus}");
     }
 }
