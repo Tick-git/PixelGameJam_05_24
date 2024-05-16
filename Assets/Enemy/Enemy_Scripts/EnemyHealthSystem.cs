@@ -33,30 +33,35 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable
     {
         StopAllCoroutines();
 
-        _currentHealth -= damage;
-
-        _rb.AddForce((transform.position - origin).normalized * _knockbackForce, ForceMode2D.Impulse);
-
-        StartCoroutine(HandleDamageTook());
+        StartCoroutine(HandleDamageTook(damage, origin));
     }
 
-    private IEnumerator HandleDamageTook()
+    private IEnumerator HandleDamageTook(int damage, Vector3 origin)
     {
+        AddKnockbackToEnemy(origin);
+
+        _currentHealth -= damage;
+
         Color colorBeforeFlashRed = _spriteRenderer.color;
 
-        _rb.velocity = Vector2.zero;
         _steeringBehaviorBase.enabled = false;
         _spriteRenderer.color = new Color(1, 0.75f, 0.75f);
 
         yield return new WaitForSeconds(0.1f);
 
+        _rb.velocity = Vector2.zero;
         _spriteRenderer.color = colorBeforeFlashRed;
         _steeringBehaviorBase.enabled = true;
 
-        if(_currentHealth <= 0)
+        if (_currentHealth <= 0)
         {
             _enemySpawnManager.SetEnemyInactive(gameObject);
             _currentHealth = _maxHealth;
         }
+    }
+
+    private void AddKnockbackToEnemy(Vector3 origin)
+    {
+        _rb.AddForce((transform.position - origin).normalized * _knockbackForce, ForceMode2D.Impulse);
     }
 }
