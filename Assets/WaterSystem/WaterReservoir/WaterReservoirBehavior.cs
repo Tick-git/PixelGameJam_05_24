@@ -35,5 +35,10 @@ public class WaterReservoirBehavior : MonoBehaviour, IWaterReservoir
 
         OnWaterStatusChanged?.Invoke(_waterReservoir.GetWaterStatus());
     }
+
+    public float GetMaxCapacity()
+    {
+        return _waterReservoir.GetMaxCapacity();    
+    }
 }
 

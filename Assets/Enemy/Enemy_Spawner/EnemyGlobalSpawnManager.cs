@@ -16,13 +16,15 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
 
     PlayerController _playerController;
 
+    WaterdropManagerBehavior _waterdropManager;
+
     private void Awake()
     {
         _enemyPositionWhileInactive = new Vector2(-100, -100);
         _enemyParentTransform = new GameObject("Enemies").transform;
         _inactiveEnemiesQueue = new Queue<GameObject>();
         _playerController = FindObjectOfType<PlayerController>();
-
+        _waterdropManager = FindObjectOfType<WaterdropManagerBehavior>();
     }
 
     IEnumerator Start()
@@ -125,18 +127,31 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
 
     private void InstantiateEasyEnemy()
     {
-        GameObject enemy = Instantiate(_enemyEasyPrefab, _enemyPositionWhileInactive, Quaternion.identity, _enemyParentTransform);
-        SetEnemyInactive(enemy);
+        InstantiateEnemy(_enemyEasyPrefab);
+
     }
     private void InstantiateFastEnemy()
     {
-        GameObject enemy = Instantiate(_enemyFastPrefab, _enemyPositionWhileInactive, Quaternion.identity, _enemyParentTransform);
+        InstantiateEnemy(_enemyFastPrefab);
+    }
+
+    private void InstantiateEnemy(GameObject enemyPrefab)
+    {
+        GameObject enemy = Instantiate(enemyPrefab, _enemyPositionWhileInactive, Quaternion.identity, _enemyParentTransform);
+
         SetEnemyInactive(enemy);
     }
 
-    internal void SetEnemyInactive(GameObject enemy)
+    private void SetEnemyInactive(GameObject enemy)
     {
         enemy.SetActive(false);
         _inactiveEnemiesQueue.Enqueue(enemy);
+    }
+
+    internal void DespawnEnemy(GameObject enemy)
+    {
+        SetEnemyInactive(enemy);
+
+        _waterdropManager.SpawnWaterdrop(enemy.transform.position);
     }
 }

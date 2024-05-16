@@ -54,7 +54,7 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable
 
         if (_currentHealth <= 0)
         {
-            _enemySpawnManager.SetEnemyInactive(gameObject);
+            _enemySpawnManager.DespawnEnemy(gameObject);
             _currentHealth = _maxHealth;
         }
     }

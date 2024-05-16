@@ -19,7 +19,10 @@ public class PlayerHealthSystem : MonoBehaviour, IDamageable
 
         _currentHealth -= damage;
 
-        Debug.Log(_currentHealth);
+        if(_currentHealth >= 0)
+        {
+            Debug.Log(_currentHealth);
+        }
 
         _playerCantBeHit = StartCoroutine(ResetPlayerHitCooldown());
     }

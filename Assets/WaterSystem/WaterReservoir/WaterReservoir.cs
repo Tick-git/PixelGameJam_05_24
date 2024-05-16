@@ -9,6 +9,11 @@
         _currentWater = startWater;
     }
 
+    public float GetMaxCapacity()
+    {
+        return _maxWater;
+    }
+
     public float GetWater(float waterAmount)
     {
         float waterToReturn = 0;

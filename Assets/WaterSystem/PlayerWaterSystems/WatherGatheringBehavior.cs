@@ -13,7 +13,10 @@ public class WatherGatheringBehavior : MonoBehaviour
     {
         if (!CollisionIsWaterdrop(collision)) return;
 
-        _waterReservoir.SetWater(collision.GetComponent<IWaterCollectable>().CollectWater(transform));
+        if(_waterReservoir.GetWaterStatus() < _waterReservoir.GetMaxCapacity())
+        {
+            _waterReservoir.SetWater(collision.GetComponent<IWaterCollectable>().CollectWater(transform));
+        }
     }
 
     private bool CollisionIsWaterdrop(Collider2D collision)

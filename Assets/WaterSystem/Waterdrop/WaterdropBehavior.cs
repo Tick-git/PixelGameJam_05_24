@@ -3,6 +3,18 @@ using UnityEngine;
 
 public class WaterdropBehavior : MonoBehaviour, IWaterCollectable
 {
+    WaterdropManagerBehavior _waterdropManager;
+
+    private void Awake()
+    {
+        _waterdropManager = FindObjectOfType<WaterdropManagerBehavior>();
+    }
+
+    private void OnEnable()
+    {
+        SetWaterdropActivity(true);
+    }
+
     public float CollectWater(Transform collecter)
     {
         SetWaterdropActivity(false);
@@ -26,7 +38,7 @@ public class WaterdropBehavior : MonoBehaviour, IWaterCollectable
             yield return null;
         }
 
-        Destroy(gameObject);
+        _waterdropManager.DespawnWaterdrop(gameObject);
     }
 }
 
