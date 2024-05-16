@@ -19,7 +19,7 @@ public class EnemyDamageSystem : MonoBehaviour
 
     void Update()
     {
-        if(_coroutine == null && Vector2.Distance(transform.position, _target.position) <= 0.11f)
+        if(_coroutine == null && Vector2.Distance(transform.position, _target.position) <= 0.15f)
         {
             _target.GetComponent<IDamageable>().TakeDamage(10, transform.position);
             _steeringBehaviorBase.enabled = false;
