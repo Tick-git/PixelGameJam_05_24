@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -27,39 +26,31 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable
     private void Start()
     {
         _enemySpawnManager = FindObjectOfType<EnemyGlobalSpawnManager>();
-
-        if (_enemySpawnManager == null)
-            throw new NullReferenceException("EnemyGlobalSpawnManager not found");
-
         _currentHealth = _maxHealth;
     }
 
     public void TakeDamage(int damage, Vector3 origin)
     {
-        if(enabled == false)
-            return;
-
         StopAllCoroutines();
 
         _currentHealth -= damage;
 
         _rb.AddForce((transform.position - origin).normalized * _knockbackForce, ForceMode2D.Impulse);
 
-        StartCoroutine(FlashRed());
+        StartCoroutine(HandleDamageTook());
     }
 
-    private IEnumerator FlashRed()
+    private IEnumerator HandleDamageTook()
     {
-        _steeringBehaviorBase.enabled = false;
-
         Color colorBeforeFlashRed = _spriteRenderer.color;
+
+        _rb.velocity = Vector2.zero;
+        _steeringBehaviorBase.enabled = false;
         _spriteRenderer.color = new Color(1, 0.75f, 0.75f);
 
         yield return new WaitForSeconds(0.1f);
 
         _spriteRenderer.color = colorBeforeFlashRed;
-        _rb.velocity = Vector2.zero;
-
         _steeringBehaviorBase.enabled = true;
 
         if(_currentHealth <= 0)

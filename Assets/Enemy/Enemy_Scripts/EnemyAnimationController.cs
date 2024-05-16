@@ -1,19 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAnimationController : MonoBehaviour
 {
     Animator _animationController;
-    Rigidbody2D _rb;
 
     Transform _target;
 
     private void Awake()
     {
         _animationController = GetComponent<Animator>();
-        _rb = GetComponent<Rigidbody2D>();
-        _target = FindObjectOfType<PlayerController>().transform;
+    }
+
+    private void Start()
+    {
+        _target = GetComponent<EnemyTargetBehavior>().Target;
     }
 
     void Update()

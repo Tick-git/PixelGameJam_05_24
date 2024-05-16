@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SteeringBehaviorBase : MonoBehaviour
@@ -9,15 +6,12 @@ public class SteeringBehaviorBase : MonoBehaviour
     Steering[] steerings;
     
     float maxAcceleration = 10f;
-    float maxAngularAcceleration = 3f;
     
-    float drag = 1f;
 
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         steerings = GetComponents<Steering>();
-        _rb.drag = drag;
     }
 
     void FixedUpdate()

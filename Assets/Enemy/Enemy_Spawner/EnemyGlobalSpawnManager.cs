@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Serialization;
 using UnityEngine;
 
 public class EnemyGlobalSpawnManager : MonoBehaviour
@@ -11,59 +10,49 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
     [SerializeField] EnemySpawnSettingsSO _spawnSettings;
 
     Transform _enemyParentTransform;
-    Vector2 _inactivePosition;
+    Vector2 _enemyPositionWhileInactive;
 
-    Queue<GameObject> _inactiveEnemies;
+    Queue<GameObject> _inactiveEnemiesQueue;
 
     PlayerController _playerController;
 
     private void Awake()
     {
-        _inactivePosition = new Vector2(-100, -100);
+        _enemyPositionWhileInactive = new Vector2(-100, -100);
         _enemyParentTransform = new GameObject("Enemies").transform;
-
-        _inactiveEnemies = new Queue<GameObject>();
-
-        int spawnRateFast = Mathf.RoundToInt(10 / _spawnSettings.SpawnDifficultyMultiplier);
-
-        for (int i = 0; i < _spawnSettings.MaxEnemieCount; i++)
-        {
-            if(i % spawnRateFast == 0)
-            {
-                InstantiateFastEnemy();
-            } 
-            else
-            {
-                InstantiateEasyEnemy();
-            }
-        }
-
+        _inactiveEnemiesQueue = new Queue<GameObject>();
         _playerController = FindObjectOfType<PlayerController>();
+
     }
 
     IEnumerator Start()
     {
         WaitForSeconds wait = new WaitForSeconds(10.0f / _spawnSettings.SpawnIntervalMultiplier);
-
-        //for (int i = _spawnSettings.EnemyStartCount; i > 0;)
-        //{
-        //    if (i < groupSize)
-        //    {
-        //        groupSize = i;
-        //    }
-
-        //    SpawnEnemyGroup(groupSize);
-
-        //    i -= groupSize;
-
-        //    yield return wait;
-        //}
+        
+        InstantiateEnemies();
 
         while (true)
         {
-            SpawnEnemyGroup(Random.Range(1,6));
+            SpawnEnemyGroup(Random.Range(1, 6));
 
             yield return wait;
+        }
+    }
+
+    private void InstantiateEnemies()
+    {
+        int spawningRateForFastEnemies = Mathf.RoundToInt(10 / _spawnSettings.SpawnDifficultyMultiplier);
+
+        for (int i = 0; i < _spawnSettings.MaxEnemieCount; i++)
+        {
+            if (i % spawningRateForFastEnemies == 0)
+            {
+                InstantiateFastEnemy();
+            }
+            else
+            {
+                InstantiateEasyEnemy();
+            }
         }
     }
 
@@ -120,7 +109,7 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
 
         for (int i = 0; i < groupSize; i++)
         {
-            if (_inactiveEnemies.TryDequeue(out GameObject enemy))
+            if (_inactiveEnemiesQueue.TryDequeue(out GameObject enemy))
             {
                 enemies.Add(enemy);
             }
@@ -136,18 +125,18 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
 
     private void InstantiateEasyEnemy()
     {
-        GameObject enemy = Instantiate(_enemyEasyPrefab, _inactivePosition, Quaternion.identity, _enemyParentTransform);
+        GameObject enemy = Instantiate(_enemyEasyPrefab, _enemyPositionWhileInactive, Quaternion.identity, _enemyParentTransform);
         SetEnemyInactive(enemy);
     }
     private void InstantiateFastEnemy()
     {
-        GameObject enemy = Instantiate(_enemyFastPrefab, _inactivePosition, Quaternion.identity, _enemyParentTransform);
+        GameObject enemy = Instantiate(_enemyFastPrefab, _enemyPositionWhileInactive, Quaternion.identity, _enemyParentTransform);
         SetEnemyInactive(enemy);
     }
 
     internal void SetEnemyInactive(GameObject enemy)
     {
         enemy.SetActive(false);
-        _inactiveEnemies.Enqueue(enemy);
+        _inactiveEnemiesQueue.Enqueue(enemy);
     }
 }

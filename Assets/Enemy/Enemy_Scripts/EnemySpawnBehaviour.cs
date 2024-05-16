@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemySpawn : MonoBehaviour
+public class EnemySpawnBehaviour : MonoBehaviour
 {
     SpriteRenderer _spriteRenderer;
     Color _startColor;
@@ -16,7 +16,7 @@ public class EnemySpawn : MonoBehaviour
     {
         SetPlayerActiveStatus(false);
 
-        StartCoroutine(EnableSteeringBehavior());
+        StartCoroutine(StartSpawnSequence());
     }
 
     private void SetPlayerActiveStatus(bool isActive)
@@ -24,6 +24,7 @@ public class EnemySpawn : MonoBehaviour
         GetComponent<SteeringBehaviorBase>().enabled = isActive;
         GetComponent<EnemyHealthSystem>().enabled = isActive;
         GetComponent<EnemyDamageSystem>().enabled = isActive;
+        GetComponent<Collider2D>().enabled = isActive;
     }
 
     private void OnDisable()
@@ -32,7 +33,7 @@ public class EnemySpawn : MonoBehaviour
         _spriteRenderer.color = _startColor;
     }
 
-    private IEnumerator EnableSteeringBehavior()
+    private IEnumerator StartSpawnSequence()
     {
         Color tranparentColor = new Color(_startColor.r, _startColor.g, _startColor.b, 0);
         float time = 0;

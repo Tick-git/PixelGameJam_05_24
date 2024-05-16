@@ -3,41 +3,38 @@ using UnityEngine;
 
 public class SeparationBehavior : Steering
 {
+    [SerializeField] LayerMask _layerMask;
+    [SerializeField] float threshold = 2f;
+    [SerializeField] float decayCoefficient = -25f;
+
     Collider2D _collider;
 
-    [SerializeField] LayerMask _layerMask;
-
-    [SerializeField] private float threshold = 2f;
-    [SerializeField] private float decayCoefficient = -25f;
+    ContactFilter2D _contactFilter;
 
     private void Awake()
     {
         _collider = GetComponent<Collider2D>();
-    }
-
-    void Start()
-    {
-        SteeringBehaviorBase[] agents = FindObjectsOfType<SteeringBehaviorBase>();
+        _contactFilter = new ContactFilter2D() { useTriggers = true, layerMask = _layerMask, useLayerMask = true };
     }
 
     public override SteeringData GetSteering(SteeringBehaviorBase steeringbase)
     {
         SteeringData steering = new SteeringData();
 
-        List<Collider2D> collider2Ds = new List<Collider2D>();
+        List<Collider2D> enemiesInRange = new List<Collider2D>();
 
-        _collider.OverlapCollider(new ContactFilter2D() { useTriggers = true, layerMask = _layerMask, useLayerMask = true}, collider2Ds); ;
+        _collider.OverlapCollider(_contactFilter, enemiesInRange);
 
-        foreach (Collider2D target in collider2Ds)
+        foreach (Collider2D target in enemiesInRange)
         {
-            Vector3 direction = target.transform.position - transform.position;
-            float distance = direction.magnitude;
+            Vector3 directionToTarget = target.transform.position - transform.position;
+            float distanceToTarget = directionToTarget.magnitude;
 
-            if (distance < threshold)
+            if (distanceToTarget < threshold)
             {
-                float strength = decayCoefficient / (distance * distance);
-                direction.Normalize();
-                steering.Linear += strength * direction;
+                float strength = decayCoefficient / (distanceToTarget * distanceToTarget);
+                directionToTarget.Normalize();
+                steering.Linear += strength * directionToTarget;
             }
         }
 
