@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weight: 1
-  _layerMask:
+  _seperateFromLayer:
     serializedVersion: 2
     m_Bits: 512
   threshold: 0.3

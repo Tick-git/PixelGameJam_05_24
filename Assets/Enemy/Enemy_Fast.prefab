@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: _layerMask.m_Bits
       value: 1024
       objectReference: {fileID: 0}
+    - target: {fileID: 1866903507196010061, guid: 8d869fa690f04c9408d4734806c63ac6, type: 3}
+      propertyPath: _seperateFromLayer.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     - target: {fileID: 1940694120029535094, guid: 8d869fa690f04c9408d4734806c63ac6, type: 3}
       propertyPath: _maxHealth
       value: 10

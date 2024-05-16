@@ -38,12 +38,11 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable
 
     private IEnumerator HandleDamageTook(int damage, Vector3 origin)
     {
+        Color colorBeforeFlashRed = _spriteRenderer.color;
+
         AddKnockbackToEnemy(origin);
 
         _currentHealth -= damage;
-
-        Color colorBeforeFlashRed = _spriteRenderer.color;
-
         _steeringBehaviorBase.enabled = false;
         _spriteRenderer.color = new Color(1, 0.75f, 0.75f);
 

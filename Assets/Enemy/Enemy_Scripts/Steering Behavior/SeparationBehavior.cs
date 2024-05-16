@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SeparationBehavior : Steering
 {
-    [SerializeField] LayerMask _layerMask;
+    [SerializeField] LayerMask _seperateFromLayer;
     [SerializeField] float threshold = 2f;
     [SerializeField] float decayCoefficient = -25f;
 
@@ -14,7 +14,7 @@ public class SeparationBehavior : Steering
     private void Awake()
     {
         _collider = GetComponent<Collider2D>();
-        _contactFilter = new ContactFilter2D() { useTriggers = true, layerMask = _layerMask, useLayerMask = true };
+        _contactFilter = new ContactFilter2D() { useTriggers = true, layerMask = _seperateFromLayer, useLayerMask = true };
     }
 
     public override SteeringData GetSteering(SteeringBehaviorBase steeringbase)
