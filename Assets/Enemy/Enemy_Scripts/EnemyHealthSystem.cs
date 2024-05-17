@@ -14,6 +14,8 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable
 
     SteeringBehaviorBase _steeringBehaviorBase;
 
+    AudioSource _audioSource;
+
     float _currentHealth;
 
     private void Awake()
@@ -21,6 +23,7 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable
         _rb = GetComponent<Rigidbody2D>();    
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _steeringBehaviorBase = GetComponent<SteeringBehaviorBase>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()

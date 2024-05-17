@@ -26,10 +26,5 @@ public class WaterStatusDisplay : MonoBehaviour
     private void OnWaterStatusChanged(float newValue)
     {
         _scrollbar.size = newValue / _waterReservoir.GetMaxCapacity();
-
-        if (newValue >= _waterReservoir.GetMaxCapacity())
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
     }
 }

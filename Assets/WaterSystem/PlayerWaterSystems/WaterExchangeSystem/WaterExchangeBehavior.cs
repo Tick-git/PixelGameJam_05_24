@@ -34,7 +34,7 @@ public class WaterExchangeBehavior : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E) && _waterReservoirsNearPlayer.Count > 0)
+        if(Input.GetKeyDown(KeyCode.Space) && _waterReservoirsNearPlayer.Count > 0)
         {
             _waterReservoirsNearPlayer.Values.First().WaterReservoir.SetWater(_playerWaterReservoir.GetWater(10));
         }

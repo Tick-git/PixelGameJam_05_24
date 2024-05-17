@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
 
     Vector2 _movementVector;
 
+    PlayerSoundSystem _playerSoundSystem;
+
     public Vector2 MovementVector { get => _movementVector; set => _movementVector = value; }
 
     private void Awake()
@@ -21,6 +23,7 @@ public class PlayerController : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _colllider2D = GetComponent<CircleCollider2D>();
+        _playerSoundSystem = GetComponent<PlayerSoundSystem>();
     }
 
     private void Update()
@@ -41,11 +44,15 @@ public class PlayerController : MonoBehaviour
                     enemy.TakeDamage(10, transform.position);
                 }
             }
+
+            _playerSoundSystem.PlayPlayerAttackSound();
         } 
         else if(Input.GetButton("Fire2") && _attackCooldown <= 0)
         {
             _attackCooldown = _playerStats.AttackCooldown;
             GetComponentInChildren<AoeSpellController>().CastSpell(Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position);
+
+            _playerSoundSystem.PlayPlayerAttackSound();
         }
         else
         {

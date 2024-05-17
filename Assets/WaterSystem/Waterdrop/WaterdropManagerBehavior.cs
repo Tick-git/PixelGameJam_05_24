@@ -13,11 +13,14 @@ public class WaterdropManagerBehavior : MonoBehaviour
 
     Transform _waterdropParent;
 
+    WaterdropSoundSystem _waterdropSoundSystem;
+
     private void Awake()
     {
         _waterdropPositionWhileInactive = new Vector2(-100, -100);
         _inactiveWaterdropsQueue = new Queue<GameObject>();
         _waterdropParent = new GameObject("Waterdrops").transform;
+        _waterdropSoundSystem = FindObjectOfType<WaterdropSoundSystem>();
     }
 
     void Start()
@@ -55,6 +58,7 @@ public class WaterdropManagerBehavior : MonoBehaviour
         gameObject.SetActive(false);
         gameObject.transform.position = _waterdropPositionWhileInactive;
 
+        _waterdropSoundSystem.PlayWaterdropCollectedSound();
         _inactiveWaterdropsQueue.Enqueue(gameObject);
     }
 }
