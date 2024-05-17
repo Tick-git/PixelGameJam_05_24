@@ -137,8 +137,8 @@ MonoBehaviour:
   _seperateFromLayer:
     serializedVersion: 2
     m_Bits: 512
-  threshold: 0.3
-  decayCoefficient: -0.02
+  threshold: 0.2
+  decayCoefficient: -0.01
 --- !u!114 &5061863478137515265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,4 +283,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.25
