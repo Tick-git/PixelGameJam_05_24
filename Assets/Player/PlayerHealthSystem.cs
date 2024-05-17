@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealthSystem : MonoBehaviour, IDamageable
 {
@@ -8,9 +10,11 @@ public class PlayerHealthSystem : MonoBehaviour, IDamageable
     Coroutine _playerCantBeHit;
     WaitForSeconds _playerHitCooldown;
 
+    public Action<float> OnHealthChanged;
+
     private void Awake()
     {
-        _playerHitCooldown = new WaitForSeconds(0.25f);
+        _playerHitCooldown = new WaitForSeconds(0.125f);
     }
 
     public void TakeDamage(int damage, Vector3 origin)
@@ -19,12 +23,19 @@ public class PlayerHealthSystem : MonoBehaviour, IDamageable
 
         _currentHealth -= damage;
 
-        if(_currentHealth >= 0)
+        OnHealthChanged(_currentHealth);
+
+        if (_currentHealth <= 0)
         {
-            Debug.Log(_currentHealth);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         _playerCantBeHit = StartCoroutine(ResetPlayerHitCooldown());
+    }
+
+    public float GetMaxHealth()
+    {
+        return 100;
     }
 
     private IEnumerator ResetPlayerHitCooldown()
