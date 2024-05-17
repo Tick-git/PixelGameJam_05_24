@@ -93,19 +93,6 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -120,12 +107,20 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: 0, y: -24}
+        - {x: 24, y: 0}
+        - {x: 0, y: 24}
+        - {x: -24, y: 0}
+      physicsShape:
+      - - {x: 0, y: -24}
+        - {x: 24, y: 0}
+        - {x: 0, y: 24}
+        - {x: -24, y: 0}
       tessellationDetail: 0
       bones: []
-      spriteID: 9a2aa0afa40eecb429e53036f0681358
-      internalID: 200159810
+      spriteID: 2a8d28f2994060d4fb29ae393790f716
+      internalID: 853787243
       vertices: []
       indices: 
       edges: []
@@ -141,12 +136,20 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: 0, y: -24}
+        - {x: 24, y: 0}
+        - {x: 0, y: 24}
+        - {x: -24, y: 0}
+      physicsShape:
+      - - {x: 0, y: -24}
+        - {x: 24, y: 0}
+        - {x: 0, y: 24}
+        - {x: -24, y: 0}
       tessellationDetail: 0
       bones: []
-      spriteID: a68218525120e284eb1a53fa7c558fb9
-      internalID: 1273192694
+      spriteID: 8c485ab58b31e0b4ea9479613c083b1a
+      internalID: -1582337499
       vertices: []
       indices: 
       edges: []
@@ -162,12 +165,20 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: 0, y: -24}
+        - {x: 24, y: 0}
+        - {x: 0, y: 24}
+        - {x: -24, y: 0}
+      physicsShape:
+      - - {x: 0, y: -24}
+        - {x: 24, y: 0}
+        - {x: 0, y: 24}
+        - {x: -24, y: 0}
       tessellationDetail: 0
       bones: []
-      spriteID: b9992c941675f494f9da17c8a4aa4924
-      internalID: 630096815
+      spriteID: c7acdcfe6e2ab5242979a9c5376750ab
+      internalID: -1985655805
       vertices: []
       indices: 
       edges: []
@@ -183,12 +194,20 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
+      outline:
+      - - {x: 0, y: -24}
+        - {x: 24, y: 0}
+        - {x: 0, y: 24}
+        - {x: -24, y: 0}
+      physicsShape:
+      - - {x: 0, y: -24}
+        - {x: 24, y: 0}
+        - {x: 0, y: 24}
+        - {x: -24, y: 0}
       tessellationDetail: 0
       bones: []
-      spriteID: e4f4722aa11102e4a8176ca04a3d8d5f
-      internalID: -1580789926
+      spriteID: 7dc7fbd8584bad645987d3f8496a8455
+      internalID: 80708531
       vertices: []
       indices: 
       edges: []
@@ -204,10 +223,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player Walk Left 48x48_0: 200159810
-      Player Walk Left 48x48_1: 1273192694
-      Player Walk Left 48x48_2: 630096815
-      Player Walk Left 48x48_3: -1580789926
+      Player Walk Left 48x48_0: 853787243
+      Player Walk Left 48x48_1: -1582337499
+      Player Walk Left 48x48_2: -1985655805
+      Player Walk Left 48x48_3: 80708531
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
