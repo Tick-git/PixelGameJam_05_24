@@ -60,7 +60,7 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
 
     private void SpawnEnemyGroup(int groupSize)
     {
-        Vector2 groupSpawnPosition = GetGroupSpawnPosition();
+        Vector2 groupSpawnPosition = GetRandomGroupSpawnPosition();
 
         List<GameObject> enemies = GetInactiveEnemies(groupSize);
         List<Vector2> spawnPositions = GetDifferentPositionsCircle(groupSize, 0.5f);
@@ -70,6 +70,11 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
             enemies[i].transform.position = groupSpawnPosition + spawnPositions.ElementAt(i);
             enemies[i].SetActive(true);
         }
+    }
+
+    private Vector2 GetRandomGroupSpawnPosition()
+    {
+        return Random.insideUnitCircle * 6.0f;
     }
 
     private static List<Vector2> GetDifferentPositionsCircle(int positionCount, float radius)

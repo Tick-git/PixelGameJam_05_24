@@ -69,6 +69,8 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable
 
     private void AddKnockbackToEnemy(Vector3 origin, float damage)
     {
-        _rb.AddForce((transform.position - origin).normalized * _knockbackForce * (damage/10.0f), ForceMode2D.Impulse);
+        if (damage < 10) return;
+
+        _rb.AddForce((transform.position - origin).normalized * _knockbackForce, ForceMode2D.Impulse);
     }
 }
