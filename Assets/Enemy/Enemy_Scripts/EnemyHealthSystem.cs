@@ -18,12 +18,15 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable
 
     float _currentHealth;
 
+    EnemyDamageSystem _enemyDamageSystem;
+
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();    
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _steeringBehaviorBase = GetComponent<SteeringBehaviorBase>();
         _audioSource = GetComponent<AudioSource>();
+        _enemyDamageSystem = GetComponent<EnemyDamageSystem>();
     }
 
     private void Start()
@@ -43,17 +46,19 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable
     {
         Color colorBeforeFlashRed = _spriteRenderer.color;
 
-        AddKnockbackToEnemy(origin);
+        AddKnockbackToEnemy(origin, damage);
 
         _currentHealth -= damage;
         _steeringBehaviorBase.enabled = false;
         _spriteRenderer.color = new Color(1, 0.75f, 0.75f);
+        _enemyDamageSystem.enabled = false;
 
         yield return new WaitForSeconds(0.1f);
 
         _rb.velocity = Vector2.zero;
         _spriteRenderer.color = colorBeforeFlashRed;
         _steeringBehaviorBase.enabled = true;
+        _enemyDamageSystem.enabled = true;
 
         if (_currentHealth <= 0)
         {
@@ -62,8 +67,8 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable
         }
     }
 
-    private void AddKnockbackToEnemy(Vector3 origin)
+    private void AddKnockbackToEnemy(Vector3 origin, float damage)
     {
-        _rb.AddForce((transform.position - origin).normalized * _knockbackForce, ForceMode2D.Impulse);
+        _rb.AddForce((transform.position - origin).normalized * _knockbackForce * (damage/10.0f), ForceMode2D.Impulse);
     }
 }
