@@ -10,6 +10,7 @@ public class TreeDamageBehavior : MonoBehaviour
     [SerializeField] int _treeDamage = 10;
     [SerializeField] float _damageIntervalInSeconds = 1f;
     [SerializeField] LayerMask _enemyLayerMask;
+    [SerializeField] GameObject _projctile;
 
     Collider2D _attackRadiusCollider;
 
@@ -59,13 +60,8 @@ public class TreeDamageBehavior : MonoBehaviour
             if(_targets.Count > 0 && t > 1)
             {
                 target = (MonoBehaviour) _targets.ElementAt(0);
-                _targets.ElementAt(0).TakeDamage(_treeDamage, transform.position);
+                Instantiate(_projctile, transform.position + Vector3.up * 0.5f, Quaternion.identity).GetComponent<ProjectileBehavior>().Shoot(target.transform, _treeDamage);
                 t = 0;
-            }
-
-            if(_targets.Count > 0 && target != null)
-            {
-                Debug.DrawRay(transform.position, target.transform.position - transform.position, Color.red);
             }
 
             t += Time.deltaTime / _damageIntervalInSeconds;

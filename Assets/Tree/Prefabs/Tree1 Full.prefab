@@ -90,6 +90,7 @@ MonoBehaviour:
   _enemyLayerMask:
     serializedVersion: 2
     m_Bits: 1536
+  _projctile: {fileID: 1829479927015229403, guid: ca124b724ada792409d26e4d872b432f, type: 3}
 --- !u!58 &7996794717724737267
 CircleCollider2D:
   m_ObjectHideFlags: 0
