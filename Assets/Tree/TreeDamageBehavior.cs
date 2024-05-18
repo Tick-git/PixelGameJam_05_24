@@ -19,7 +19,6 @@ public class TreeDamageBehavior : MonoBehaviour
 
     private void Awake()
     {
-        enabled = false;
         _attackRadiusCollider = GetComponent<Collider2D>();
         _cooldownBar = GetComponentInChildren<Scrollbar>();
         _targets = new HashSet<IDamageable>();
