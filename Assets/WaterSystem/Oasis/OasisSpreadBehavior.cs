@@ -53,11 +53,14 @@ public class OasisSpreadBehavior : MonoBehaviour
             if (!_oasisExtensions.ContainsKey(extension.ExtensionLayer))
             {
                 _oasisExtensions[extension.ExtensionLayer] = extension.gameObject;
+                extension.gameObject.SetActive(false);
             }
             else
             {
                 throw new System.Exception($"Oasis Extension layer already exists on {extension.gameObject.name}");
             }
         }
+
+        _oasisExtensions[0].gameObject.SetActive(true);
     }
 }
