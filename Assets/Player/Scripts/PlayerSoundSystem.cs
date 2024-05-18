@@ -24,6 +24,7 @@ public class PlayerSoundSystem : MonoBehaviour
     public void PlayPlayerAttackSound()
     {
         _audioSources[1].volume = 0.125f;
+        _audioSources[1].pitch = Random.Range(0.9f, 1.1f);
         _audioSources[1].clip = _playerAttackAudioClip;
         _audioSources[1].Play();
     }
