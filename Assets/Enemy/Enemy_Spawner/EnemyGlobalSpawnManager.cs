@@ -56,7 +56,6 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
 
         for (int i = 0; i < groupSize; i++)
         {
-            Debug.Log("Spawn " + enemies[i].GetInstanceID());
             enemies[i].transform.position = groupSpawnPosition + spawnPositions.ElementAt(i);
             enemies[i].SetActive(true);
         }

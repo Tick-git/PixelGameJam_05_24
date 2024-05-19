@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-[DefaultExecutionOrder(-1)]
 public class EnemySpawnBehaviour : MonoBehaviour
 {
     SpriteRenderer _spriteRenderer;
@@ -15,8 +14,6 @@ public class EnemySpawnBehaviour : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("TEST");
-
         SetPlayerActiveStatus(false);
 
         StartCoroutine(StartSpawnSequence());
@@ -48,6 +45,8 @@ public class EnemySpawnBehaviour : MonoBehaviour
             time += Time.deltaTime;
             yield return null;
         }
+
+        Debug.Log(_startColor);
 
         _spriteRenderer.color = _startColor;
         SetPlayerActiveStatus(true);
