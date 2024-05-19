@@ -18,7 +18,10 @@ public class ProjectileBehavior : MonoBehaviour
             yield return null;
         }
 
-        target.GetComponent<IDamageable>().TakeDamage(damage, transform.position);
+        if (target.gameObject.activeSelf)
+        {
+            target.GetComponent<IDamageable>().TakeDamage(damage, transform.position);
+        }
 
         Destroy(gameObject);
     }

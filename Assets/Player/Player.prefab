@@ -838,6 +838,22 @@ PrefabInstance:
       propertyPath: m_Value
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8646137538909945102, guid: f57c6f28f1c507e47a67e5d5f379ae25, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -81.5082
+      objectReference: {fileID: 0}
+    - target: {fileID: 8646137538909945102, guid: f57c6f28f1c507e47a67e5d5f379ae25, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -48.0486
+      objectReference: {fileID: 0}
+    - target: {fileID: 8646137538909945102, guid: f57c6f28f1c507e47a67e5d5f379ae25, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 17.7738
+      objectReference: {fileID: 0}
+    - target: {fileID: 8646137538909945102, guid: f57c6f28f1c507e47a67e5d5f379ae25, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.19889832
+      objectReference: {fileID: 0}
     - target: {fileID: 9075731984797420149, guid: f57c6f28f1c507e47a67e5d5f379ae25, type: 3}
       propertyPath: m_Name
       value: PlayerHealthUI
