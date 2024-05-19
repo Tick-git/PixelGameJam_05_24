@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1432698548556987762, guid: 71cd0d00bc9067c4883360172b15c356, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ccecc94387f5b974497b8511c2223a64, type: 3}
     - target: {fileID: 2627474714018662669, guid: 71cd0d00bc9067c4883360172b15c356, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -50,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6107938781343387157, guid: 71cd0d00bc9067c4883360172b15c356, type: 3}
       propertyPath: m_Name
-      value: Tree1 Half Variant
+      value: Tree1 Half
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
