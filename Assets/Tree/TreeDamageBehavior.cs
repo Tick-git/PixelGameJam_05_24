@@ -12,6 +12,8 @@ public class TreeDamageBehavior : MonoBehaviour
     [SerializeField] LayerMask _enemyLayerMask;
     [SerializeField] GameObject _projctile;
 
+    private static ProjectSpawnPoolBehavior _projectSpawnPoolBehavior;
+
     Collider2D _attackRadiusCollider;
 
     Scrollbar _cooldownBar;
@@ -20,6 +22,11 @@ public class TreeDamageBehavior : MonoBehaviour
 
     private void Awake()
     {
+        if (_projectSpawnPoolBehavior == null)
+        {
+            _projectSpawnPoolBehavior = FindObjectOfType<ProjectSpawnPoolBehavior>();
+        }
+
         _attackRadiusCollider = GetComponent<Collider2D>();
         _cooldownBar = GetComponentInChildren<Scrollbar>();
         _targets = new HashSet<IDamageable>();
@@ -60,38 +67,13 @@ public class TreeDamageBehavior : MonoBehaviour
             if(_targets.Count > 0 && t > 1)
             {
                 target = (MonoBehaviour) _targets.ElementAt(0);
-                Instantiate(_projctile, transform.position + Vector3.up * 0.5f, Quaternion.identity).GetComponent<ProjectileBehavior>().Shoot(target.transform, _treeDamage);
+                _projectSpawnPoolBehavior.SpawnProjectile(transform.position + Vector3.up * 0.5f).GetComponent<ProjectileBehavior>().Shoot(target.transform,_treeDamage);
                 t = 0;
             }
 
             t += Time.deltaTime / _damageIntervalInSeconds;
 
             yield return null;
-        }
-    }
-
-    private IEnumerator DoDamageAround()
-    {
-        yield return new WaitForSeconds(Random.Range(0, _damageIntervalInSeconds));
-
-        while (true)
-        {
-            float t = 0;
-
-            while(t < 1)
-            {
-                _cooldownBar.size = t;
-                t += Time.deltaTime / _damageIntervalInSeconds;
-                yield return null;
-            }
-
-            List<Collider2D> hitColliders = new(); 
-            _attackRadiusCollider.OverlapCollider(new ContactFilter2D() { useTriggers = true, useLayerMask = true, layerMask = _enemyLayerMask}, hitColliders);
-
-            foreach (var hitCollider in hitColliders)
-            {
-                hitCollider.GetComponent<IDamageable>().TakeDamage(_treeDamage, transform.position);
-            }
         }
     }
 }

@@ -16,7 +16,7 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
 
     PlayerController _playerController;
 
-    WaterdropManagerBehavior _waterdropManager;
+    WaterdropSpawnpoolBehavior _waterdropManager;
 
     private void Awake()
     {
@@ -24,7 +24,7 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
         _enemyParentTransform = new GameObject("Enemies").transform;
         _inactiveEnemiesQueue = new Queue<GameObject>();
         _playerController = FindObjectOfType<PlayerController>();
-        _waterdropManager = FindObjectOfType<WaterdropManagerBehavior>();
+        _waterdropManager = FindObjectOfType<WaterdropSpawnpoolBehavior>();
     }
 
     IEnumerator Start()
