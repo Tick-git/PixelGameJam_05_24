@@ -102,7 +102,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8212881053392953693}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f617f636acfb14e4983780d59b1d9b63, type: 3}
   m_Name: 
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8212881053392953693}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3888dd2c9db446b458dabcb6f8e54548, type: 3}
   m_Name: 
@@ -177,6 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHealth: 20
   _knockbackForce: 7.5
+  _enemyType: 0
 --- !u!114 &7318819057909851628
 MonoBehaviour:
   m_ObjectHideFlags: 0

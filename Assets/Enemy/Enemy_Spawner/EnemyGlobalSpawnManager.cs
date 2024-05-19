@@ -12,7 +12,8 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
     Transform _enemyParentTransform;
     Vector2 _enemyPositionWhileInactive;
 
-    Queue<GameObject> _inactiveEnemiesQueue;
+    Queue<GameObject> _inactiveSlowEnemieQueue;
+    Queue<GameObject> _inactiveFastEnemieQueue;
 
     PlayerController _playerController;
 
@@ -22,7 +23,10 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
     {
         _enemyPositionWhileInactive = new Vector2(-100, -100);
         _enemyParentTransform = new GameObject("Enemies").transform;
-        _inactiveEnemiesQueue = new Queue<GameObject>();
+
+        _inactiveSlowEnemieQueue = new Queue<GameObject>();
+        _inactiveFastEnemieQueue = new Queue<GameObject>();
+
         _playerController = FindObjectOfType<PlayerController>();
         _waterdropManager = FindObjectOfType<WaterdropSpawnpoolBehavior>();
     }
@@ -35,28 +39,13 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
 
         while (true)
         {
-            SpawnEnemyGroup(Random.Range(1, 6));
+            SpawnEnemyGroup(Random.Range(_spawnSettings.MinEnemiesPerSpawnWave, _spawnSettings.MaxEnemiesPerSpawnWave + 1));
 
             yield return wait;
         }
     }
 
-    private void InstantiateEnemies()
-    {
-        int spawningRateForFastEnemies = Mathf.RoundToInt(10 / _spawnSettings.SpawnDifficultyMultiplier);
-
-        for (int i = 0; i < _spawnSettings.MaxEnemieCount; i++)
-        {
-            if (i % spawningRateForFastEnemies == 0)
-            {
-                InstantiateFastEnemy();
-            }
-            else
-            {
-                InstantiateEasyEnemy();
-            }
-        }
-    }
+    
 
     private void SpawnEnemyGroup(int groupSize)
     {
@@ -67,6 +56,7 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
 
         for (int i = 0; i < groupSize; i++)
         {
+            Debug.Log("Spawn " + enemies[i].GetInstanceID());
             enemies[i].transform.position = groupSpawnPosition + spawnPositions.ElementAt(i);
             enemies[i].SetActive(true);
         }
@@ -112,50 +102,81 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
 
     private List<GameObject> GetInactiveEnemies(int groupSize)
     {
+        int fastEnemieCount = Mathf.Clamp(Random.Range(_spawnSettings.MinFastEnemiesPerSpawnWave, 1 * _spawnSettings.MaxFastEnemiesPerSpawnWave + 1), 0, groupSize);
+
         List<GameObject> enemies = new List<GameObject>();
 
-        for (int i = 0; i < groupSize; i++)
+        for (int i = 0; i < fastEnemieCount; i++)
         {
-            if (_inactiveEnemiesQueue.TryDequeue(out GameObject enemy))
+            if (_inactiveFastEnemieQueue.TryDequeue(out GameObject enemy))
             {
                 enemies.Add(enemy);
             }
         }
-
-        if(enemies.Count < groupSize)
+       
+        for (int i = 0; i < groupSize - fastEnemieCount; i++)
         {
-            Debug.Log("Not enough enemies in pool");    
-        }   
-
+            if (_inactiveSlowEnemieQueue.TryDequeue(out GameObject enemy))
+            {
+                enemies.Add(enemy);
+            }
+        }
+        
         return enemies;
+    }
+
+    private void InstantiateEnemies()
+    {
+        for (int i = 0; i < _spawnSettings.MaxEnemieCount; i++)
+        {
+            if (i % 2 == 0)
+            {
+                InstantiateFastEnemy();
+            }
+            else
+            {
+                InstantiateEasyEnemy();
+            }
+        }
     }
 
     private void InstantiateEasyEnemy()
     {
-        InstantiateEnemy(_enemyEasyPrefab);
+        InstantiateEnemy(_enemyEasyPrefab, EnemyType.Normal);
 
     }
     private void InstantiateFastEnemy()
     {
-        InstantiateEnemy(_enemyFastPrefab);
+        InstantiateEnemy(_enemyFastPrefab, EnemyType.Fast);
     }
 
-    private void InstantiateEnemy(GameObject enemyPrefab)
+    private void InstantiateEnemy(GameObject enemyPrefab, EnemyType type)
     {
         GameObject enemy = Instantiate(enemyPrefab, _enemyPositionWhileInactive, Quaternion.identity, _enemyParentTransform);
 
-        SetEnemyInactive(enemy);
+        SetEnemyInactive(enemy, type);
     }
 
-    private void SetEnemyInactive(GameObject enemy)
+    private void SetEnemyInactive(GameObject enemy, EnemyType type)
     {
+        switch (type)
+        {
+            case EnemyType.Normal:
+                _inactiveSlowEnemieQueue.Enqueue(enemy);
+                break;
+            case EnemyType.Fast:
+                _inactiveFastEnemieQueue.Enqueue(enemy);
+                break;
+            default:
+                break;
+        }
+
         enemy.SetActive(false);
-        _inactiveEnemiesQueue.Enqueue(enemy);
     }
 
     internal void DespawnEnemy(GameObject enemy)
     {
-        SetEnemyInactive(enemy);
+        SetEnemyInactive(enemy, enemy.GetComponent<IEnemyType>().GetEnemyType());
 
         _waterdropManager.SpawnWaterdrop(enemy.transform.position);
     }

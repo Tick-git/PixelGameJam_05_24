@@ -11,7 +11,7 @@ public class PlayerHealthDisplay : MonoBehaviour
 
     private void Awake()
     {
-        _playerHealthSystem = TransformHelper.FindRootTransform(transform).GetComponentInChildren<PlayerHealthSystem>();
+        _playerHealthSystem = TransformHelper.FindRootTransform(FindAnyObjectByType<PlayerController>().transform).GetComponentInChildren<PlayerHealthSystem>();
         _playerHealthSystem.OnHealthChanged += UpdateHealthDisplay;
         _healthBar = GetComponentInChildren<Slider>();
         _healthBar.value = 1;

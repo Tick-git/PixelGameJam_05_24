@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+[DefaultExecutionOrder(-1)]
 public class EnemySpawnBehaviour : MonoBehaviour
 {
     SpriteRenderer _spriteRenderer;
@@ -14,6 +15,8 @@ public class EnemySpawnBehaviour : MonoBehaviour
 
     private void OnEnable()
     {
+        Debug.Log("TEST");
+
         SetPlayerActiveStatus(false);
 
         StartCoroutine(StartSpawnSequence());

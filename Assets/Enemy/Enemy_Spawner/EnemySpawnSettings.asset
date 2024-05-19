@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyStartCount: 50
   MaxEnemieCount: 200
-  SpawnIntervalMultiplier: 5
-  SpawnDifficultyMultiplier: 2
+  SpawnIntervalMultiplier: 2
+  MinEnemiesPerSpawnWave: 5
+  MaxEnemiesPerSpawnWave: 5
+  MaxFastEnemiesPerSpawnWave: 1
+  MinFastEnemiesPerSpawnWave: 1

@@ -3,12 +3,11 @@ using UnityEngine.UI;
 
 public class PlayerWaterDisplay : MonoBehaviour
 {
-    WaterReservoirBehavior _waterReservoir;
+    [SerializeField] WaterReservoirBehavior _waterReservoir;
     Slider _slider;
 
     private void Awake()
     {
-        _waterReservoir = TransformHelper.FindRootTransform(transform).GetComponentInChildren<WaterReservoirBehavior>();
         _waterReservoir.OnWaterStatusChanged += OnWaterStatusChanged;
 
         _slider = GetComponentInChildren<Slider>();

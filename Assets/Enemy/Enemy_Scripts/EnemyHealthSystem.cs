@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class EnemyHealthSystem : MonoBehaviour, IDamageable 
+public class EnemyHealthSystem : MonoBehaviour, IDamageable, IEnemyType
 {
     [SerializeField] float _maxHealth = 20;
     [SerializeField] float _knockbackForce = 10f;
+    [SerializeField] EnemyType _enemyType;
 
     Rigidbody2D _rb;
 
@@ -61,14 +62,17 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable
             StopAllCoroutines();
             _enemySpawnManager.DespawnEnemy(gameObject);
             _currentHealth = _maxHealth;
+            _steeringBehaviorBase.enabled = false;
+            _enemyDamageSystem.enabled = false;
         } 
-
+        else
+        {
+            _steeringBehaviorBase.enabled = true;
+            _enemyDamageSystem.enabled = true;     
+        }
 
         StopKnockbbackFromEnemy(damage);
-
         _spriteRenderer.color = _startColor;
-        _steeringBehaviorBase.enabled = true;
-        _enemyDamageSystem.enabled = true;     
     }
 
     private void StopKnockbbackFromEnemy(float damage)
@@ -83,5 +87,10 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable
         if (damage < 10) return;
 
         _rb.AddForce((transform.position - origin).normalized * _knockbackForce, ForceMode2D.Impulse);
+    }
+
+    public EnemyType GetEnemyType()
+    {
+        return _enemyType;
     }
 }
