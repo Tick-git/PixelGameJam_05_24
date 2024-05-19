@@ -22,7 +22,7 @@ public class ProjectileBehavior : MonoBehaviour
 
     private IEnumerator HandleShoot(Transform target, int damage)
     {
-        while(Vector3.Distance(transform.position, target.position) > 0.01f)
+        while(Vector3.Distance(transform.position, target.position) > 0.05f)
         {
             transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime) ;
             yield return null;
