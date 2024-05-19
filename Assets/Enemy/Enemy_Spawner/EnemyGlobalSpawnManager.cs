@@ -7,7 +7,8 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
 {
     [SerializeField] GameObject _enemyEasyPrefab;
     [SerializeField] GameObject _enemyFastPrefab;
-    [SerializeField] EnemySpawnSettingsSO _spawnSettings;
+    
+    EnemySpawnSettings _spawnSettings;
 
     Transform _enemyParentTransform;
     Vector2 _enemyPositionWhileInactive;
@@ -21,6 +22,8 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
 
     private void Awake()
     {
+        _spawnSettings = FindObjectOfType<GameManagerBehavior>().EnemySpawnSettings;
+
         _enemyPositionWhileInactive = new Vector2(-100, -100);
         _enemyParentTransform = new GameObject("Enemies").transform;
 
@@ -43,9 +46,7 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
 
             yield return wait;
         }
-    }
-
-    
+    }    
 
     private void SpawnEnemyGroup(int groupSize)
     {

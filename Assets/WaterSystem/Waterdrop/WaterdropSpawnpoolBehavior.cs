@@ -1,11 +1,10 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class WaterdropSpawnpoolBehavior : MonoBehaviour
 {
     [SerializeField] GameObject waterdropPrefab;
-    [SerializeField] EnemySpawnSettingsSO enemySpawnSettings;
 
     Vector2 _waterdropPositionWhileInactive;
 
@@ -21,11 +20,15 @@ public class WaterdropSpawnpoolBehavior : MonoBehaviour
         _inactiveWaterdropsQueue = new Queue<GameObject>();
         _waterdropParent = new GameObject("Waterdrops").transform;
         _waterdropSoundSystem = FindObjectOfType<WaterdropSoundSystem>();
+
+        
     }
 
-    void Start()
+    private void Start()
     {
-        for (int i = 0; i < enemySpawnSettings.MaxEnemieCount * 1.5f; i++)
+        EnemySpawnSettings EnemySpawnSettings = FindObjectOfType<GameManagerBehavior>().EnemySpawnSettings;
+
+        for (int i = 0; i < EnemySpawnSettings.MaxEnemieCount * 1.5f; i++)
         {
             InstantiateWaterdrop();
         }

@@ -46,8 +46,6 @@ public class EnemySpawnBehaviour : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log(_startColor);
-
         _spriteRenderer.color = _startColor;
         SetPlayerActiveStatus(true);
     }

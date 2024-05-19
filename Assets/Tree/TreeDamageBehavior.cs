@@ -37,6 +37,14 @@ public class TreeDamageBehavior : MonoBehaviour
         StartCoroutine(DoDamage());
     }
 
+    private void Start()
+    {
+        TreeSettings treeSettings = FindAnyObjectByType<GameManagerBehavior>().TreeSettings;
+
+        treeSettings.TreeShootInterval = _damageIntervalInSeconds;
+        treeSettings.TreeDamage = _treeDamage;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player")) return;

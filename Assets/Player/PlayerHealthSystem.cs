@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerHealthSystem : MonoBehaviour, IDamageable
 {
@@ -22,16 +21,10 @@ public class PlayerHealthSystem : MonoBehaviour, IDamageable
         OnHealthChanged(_currentHealth);
 
         _playerSoundSystem.PlayPlayerIsHitSound();
-
-        if (_currentHealth <= 0)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
     }
 
     public float GetMaxHealth()
     {
         return 100;
     }
-
 }

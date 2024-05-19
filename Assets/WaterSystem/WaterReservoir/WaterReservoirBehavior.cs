@@ -3,16 +3,17 @@ using UnityEngine;
 
 public class WaterReservoirBehavior : MonoBehaviour, IWaterReservoir
 {
-    [SerializeField] float _maxWater = 100f;
-    [SerializeField] float _startWater = 100f;
+    [SerializeField] float _startWater;
 
     IWaterReservoir _waterReservoir;
 
     public Action<float> OnWaterStatusChanged;
 
+
     private void Start()
     {
-        _waterReservoir = new WaterReservoir(_maxWater, _startWater);
+        IWaterCapacity waterCapacity = TransformHelper.FindRootTransform(transform).GetComponentInChildren<IWaterCapacity>();
+        _waterReservoir = new WaterReservoir(waterCapacity.GetMaxCapacity(), _startWater);
     }
 
     public float GetWater(float waterAmount)

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bb0aacfa861ca647b6c463839cf3844, type: 3}
+  m_Name: EnemySpawnSettingsEasy
+  m_EditorClassIdentifier: 
+  EnemySpawnSettings:
+    MaxEnemieCount: 200
+    MinEnemiesPerSpawnWave: 2
+    MaxEnemiesPerSpawnWave: 5
+    MinFastEnemiesPerSpawnWave: 1
+    MaxFastEnemiesPerSpawnWave: 1
+    SpawnIntervalMultiplier: 2
+  WaterSettings:
+    MaxOasisWaterCapacity: 160
+    MaxPlayerWaterCapacity: 20
+  TreeSettings:
+    TreeShootInterval: 0.2
+    TreeDamage: 1
