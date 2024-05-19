@@ -8,10 +8,17 @@ public class WaterExchangeBehavior : MonoBehaviour
 
     Dictionary<int, WaterReservoirData> _waterReservoirsNearPlayer;
 
+    PlayerStats _playerStats;
+
+    float _waterExchangeCooldownTimer;
+
     private void Awake()
     {
-        _playerWaterReservoir = TransformHelper.FindRootTransform(transform).GetComponentInChildren<IWaterReservoir>();   
+        Transform rootTransform = TransformHelper.FindRootTransform(transform);
+        _playerWaterReservoir = rootTransform.GetComponentInChildren<IWaterReservoir>();   
         _waterReservoirsNearPlayer = new Dictionary<int, WaterReservoirData>();
+        _playerStats = rootTransform.GetComponentInChildren<IPlayerStats>().GetPlayerStats();
+        _waterExchangeCooldownTimer = _playerStats.WaterExchangeCooldown;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -34,9 +41,12 @@ public class WaterExchangeBehavior : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && _waterReservoirsNearPlayer.Count > 0)
+        _waterExchangeCooldownTimer += Time.deltaTime / _playerStats.WaterExchangeCooldown;       
+
+        if(_waterExchangeCooldownTimer > 1 && Input.GetKey(KeyCode.Space) && _waterReservoirsNearPlayer.Count > 0)
         {
-            _waterReservoirsNearPlayer.Values.First().WaterReservoir.SetWater(_playerWaterReservoir.GetWater(10));
+            _waterReservoirsNearPlayer.Values.First().WaterReservoir.SetWater(_playerWaterReservoir.GetWater(1));
+            _waterExchangeCooldownTimer = 0;
         }
     }
 

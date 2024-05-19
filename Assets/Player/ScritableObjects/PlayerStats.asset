@@ -15,3 +15,4 @@ MonoBehaviour:
   Speed: 1.25
   Health: 0
   AttackCooldown: 1
+  WaterExchangeCooldown: 0.05

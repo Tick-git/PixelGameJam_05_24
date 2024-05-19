@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IPlayerStats
 {
     [SerializeField] PlayerStats _playerStats;
     [SerializeField] LayerMask _layerMask;
@@ -66,5 +66,10 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         _rigidbody.MovePosition(_rigidbody.position + MovementVector * _playerStats.Speed * Time.fixedDeltaTime);
+    }
+
+    PlayerStats IPlayerStats.GetPlayerStats()
+    {
+        return _playerStats;
     }
 }
