@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -62,10 +63,19 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable
             _currentHealth = _maxHealth;
         } 
 
-        _rb.velocity = Vector2.zero;
+
+        StopKnockbbackFromEnemy(damage);
+
         _spriteRenderer.color = _startColor;
         _steeringBehaviorBase.enabled = true;
         _enemyDamageSystem.enabled = true;     
+    }
+
+    private void StopKnockbbackFromEnemy(float damage)
+    {
+        if (damage < 10) return;
+
+        _rb.velocity = Vector2.zero;
     }
 
     private void AddKnockbackToEnemy(Vector3 origin, float damage)
