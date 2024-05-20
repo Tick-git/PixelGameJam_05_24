@@ -41,7 +41,7 @@ MonoBehaviour:
     MinFastEnemiesPerSpawnWaveIncrease: 0
     MaxFastEnemiesPerSpawnWaveIncrease: 1
   DifficultySettingsEvery60Seconds:
-    SpawnIntervalMultiplierIncrease: -1.5
+    SpawnIntervalMultiplierIncrease: -1.25
     WavesPerIntervalIncrease: 1
     MinEnemiesPerSpawnWaveIncrease: 1
     MaxEnemiesPerSpawnWaveIncrease: -1

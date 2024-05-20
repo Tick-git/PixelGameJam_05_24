@@ -1,0 +1,5 @@
+.buttons {
+    width: 25%;
+    margin-top: 25px;
+    font-size: 40px;
+}

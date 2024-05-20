@@ -21,14 +21,6 @@ public class GameManagerBehavior : MonoBehaviour
         EnemySpawnSettings = new EnemySpawnSettings(_gameSettings.EnemySpawnSettings);
         WaterSettings = new WaterSettings(_gameSettings.WaterSettings);
         TreeSettings = new TreeSettings(_gameSettings.TreeSettings);
-
-        _playerHealthSystem = FindObjectOfType<PlayerHealthSystem>();
-        _waterReservoirBehavior = TransformHelper.FindRootTransform(FindObjectOfType<OasisSpreadBehavior>().transform).GetComponentInChildren<WaterReservoirBehavior>();
-
-        _playerHealthSystem.OnHealthChanged += OnPlayerHealthChanged;
-        _waterReservoirBehavior.OnWaterStatusChanged += OnOasisWaterStatusChanged;
-
-        Instantiate(_enemyGlobalSpawnManager);
     }
 
     private void OnDestroy()
@@ -75,5 +67,16 @@ public class GameManagerBehavior : MonoBehaviour
             EnemySpawnSettings.MinFastEnemiesPerSpawnWave += difficultySettings.MinFastEnemiesPerSpawnWaveIncrease;
             EnemySpawnSettings.MaxFastEnemiesPerSpawnWave += difficultySettings.MaxFastEnemiesPerSpawnWaveIncrease;
         }
-    }   
+    }
+
+    internal void StartGame()
+    {
+        Instantiate(_enemyGlobalSpawnManager);
+
+        _playerHealthSystem = FindObjectOfType<PlayerHealthSystem>();
+        _waterReservoirBehavior = TransformHelper.FindRootTransform(FindObjectOfType<OasisSpreadBehavior>().transform).GetComponentInChildren<WaterReservoirBehavior>();
+
+        _playerHealthSystem.OnHealthChanged += OnPlayerHealthChanged;
+        _waterReservoirBehavior.OnWaterStatusChanged += OnOasisWaterStatusChanged;
+    }
 }
