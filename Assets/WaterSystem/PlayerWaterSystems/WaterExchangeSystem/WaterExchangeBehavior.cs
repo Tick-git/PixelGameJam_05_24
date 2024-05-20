@@ -23,6 +23,8 @@ public class WaterExchangeBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!collision.CompareTag("Oasis")) return;
+
         IWaterReservoir waterReservoir = TransformHelper.FindRootTransform(collision.transform).GetComponentInChildren<IWaterReservoir>();
 
         if (waterReservoir != null)
@@ -33,7 +35,9 @@ public class WaterExchangeBehavior : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(_waterReservoirsNearPlayer.ContainsKey(collision.GetInstanceID()))
+        if (!collision.CompareTag("Oasis")) return;
+
+        if (_waterReservoirsNearPlayer.ContainsKey(collision.GetInstanceID()))
         {
             _waterReservoirsNearPlayer.Remove(collision.GetInstanceID());
         }
