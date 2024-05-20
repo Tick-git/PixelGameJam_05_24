@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/GameMenu.uss?fileID=7433441132597879392&amp;guid=418c2e7248b30164bb6c100a33cd56f6&amp;type=3#GameMenu" />
+    <ui:VisualElement name="root" style="flex-grow: 1; align-items: center; justify-content: center; display: none;">
+        <ui:VisualElement name="YouWon" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/UI%20Sprites/You%20Won!.png?fileID=2800000&amp;guid=df4f5513d0e631240aab56f87f164c04&amp;type=3#You Won!&quot;); -unity-background-scale-mode: scale-to-fit; width: 75%; height: 15%; flex-shrink: 0;" />
+        <ui:VisualElement name="GameOver" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/UI%20Sprites/Game%20Over.png?fileID=2800000&amp;guid=7120cba97d6fce34bbce89b05387f8d7&amp;type=3#Game Over&quot;); -unity-background-scale-mode: scale-to-fit; width: 75%; height: 15%; flex-shrink: 0;" />
+        <ui:Button text="Restart" parse-escape-sequences="true" display-tooltip-when-elided="true" name="RestartButton" class="buttons" />
+    </ui:VisualElement>
+</ui:UXML>

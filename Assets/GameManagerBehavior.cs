@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
+using UnityEngine.VFX;
 
 public class GameManagerBehavior : MonoBehaviour
 {
@@ -33,15 +35,44 @@ public class GameManagerBehavior : MonoBehaviour
     {
         if(newWaterStatus >= _gameSettings.WaterSettings.MaxOasisWaterCapacity)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            GameEnd(true);
         }
+    }
+
+    private void GameEnd(bool playerHasWon)
+    {
+        VisualElement root = GetComponent<UIDocument>().rootVisualElement;
+        root.Q<VisualElement>("root").style.display = DisplayStyle.Flex;
+        Time.timeScale = 0;
+        
+        if(playerHasWon)
+        {
+            root.Q<VisualElement>("YouWon").style.display = DisplayStyle.Flex;
+            root.Q<VisualElement>("GameOver").style.display = DisplayStyle.None;
+        } 
+        else
+        {
+            root.Q<VisualElement>("YouWon").style.display = DisplayStyle.None;
+            root.Q<VisualElement>("GameOver").style.display = DisplayStyle.Flex;
+        }
+
+        root.Q<Button>("RestartButton").clicked += RestartClicked;
+    }
+
+    private void RestartClicked()
+    {
+        VisualElement root = GetComponent<UIDocument>().rootVisualElement;
+        root.Q<Button>("RestartButton").clicked -= RestartClicked;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
     }
 
     private void OnPlayerHealthChanged(float newHealth)
     {
         if(newHealth <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            GameEnd(false);
         }
     }
 

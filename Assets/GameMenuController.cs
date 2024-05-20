@@ -22,6 +22,8 @@ public class GameMenuController : MonoBehaviour
     {
         _root = GetComponent<UIDocument>().rootVisualElement;
 
+        _gameRunning = false;
+
         _continueButton = _root.Q<Button>("ContinueButton");
         _continueButton.clicked += ChangeGameMenuDisplayStatus;
         _continueButton.style.display = DisplayStyle.None;
@@ -46,8 +48,15 @@ public class GameMenuController : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        Time.timeScale = 0;
+    }
+
     private void Update()
     {
+        if (!_gameRunning) return;
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             ChangeGameMenuDisplayStatus();
