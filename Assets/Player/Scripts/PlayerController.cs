@@ -46,14 +46,8 @@ public class PlayerController : MonoBehaviour, IPlayerStats
             }
 
             _playerSoundSystem.PlayPlayerAttackSound();
+            _animator.SetTrigger("Attack");
         } 
-        else if(Input.GetButton("Fire2") && _attackCooldown <= 0)
-        {
-            _attackCooldown = _playerStats.AttackCooldown;
-            GetComponentInChildren<AoeSpellController>().CastSpell(Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position);
-
-            _playerSoundSystem.PlayPlayerAttackSound();
-        }
         else
         {
             _colllider2D.enabled = false;
