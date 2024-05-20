@@ -35,8 +35,7 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
     }
 
     IEnumerator Start()
-    {
-        
+    {      
         InstantiateEnemies();
 
         while (true)
