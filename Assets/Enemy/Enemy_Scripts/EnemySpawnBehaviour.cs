@@ -4,12 +4,10 @@ using UnityEngine;
 public class EnemySpawnBehaviour : MonoBehaviour
 {
     SpriteRenderer _spriteRenderer;
-    Color _startColor;
 
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _startColor = _spriteRenderer.color;
     }
 
     private void OnEnable()
@@ -30,23 +28,14 @@ public class EnemySpawnBehaviour : MonoBehaviour
     private void OnDisable()
     {
         StopAllCoroutines();
-        _spriteRenderer.color = _startColor;
     }
 
     private IEnumerator StartSpawnSequence()
     {
-        Color tranparentColor = new Color(_startColor.r, _startColor.g, _startColor.b, 0);
-        float time = 0;
+        GetComponent<Animator>().SetTrigger("Spawn");
 
-        while(time < 1)
-        {
-            _spriteRenderer.color = Color.Lerp(tranparentColor, _startColor, time);
+        yield return new WaitForSeconds(1f);
 
-            time += Time.deltaTime;
-            yield return null;
-        }
-
-        _spriteRenderer.color = _startColor;
         SetPlayerActiveStatus(true);
     }
 }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ae36593a79ae23445b5ea0aeda9d63d0
+guid: 34004e067f227fc45b59e44333d230e4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player ATK Right 48x48_0
+      name: Enemy 1 Walk Right 48x48_0
       rect:
         serializedVersion: 2
         x: 0
@@ -120,26 +120,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 0, y: -24}
-        - {x: 24, y: 0}
-        - {x: 0, y: 24}
-        - {x: -24, y: 0}
-      physicsShape:
-      - - {x: 0, y: -24}
-        - {x: 24, y: 0}
-        - {x: 0, y: 24}
-        - {x: -24, y: 0}
+      outline: []
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1e83c547b303f64ba09d8426aba310d
-      internalID: 217155832
+      spriteID: f68bbb840344fd945a2fccaea4b09bbe
+      internalID: -730553376
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player ATK Right 48x48_1
+      name: Enemy 1 Walk Right 48x48_1
       rect:
         serializedVersion: 2
         x: 48
@@ -149,26 +141,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 0, y: -24}
-        - {x: 24, y: 0}
-        - {x: 0, y: 24}
-        - {x: -24, y: 0}
-      physicsShape:
-      - - {x: 0, y: -24}
-        - {x: 24, y: 0}
-        - {x: 0, y: 24}
-        - {x: -24, y: 0}
+      outline: []
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53b93b174e0c35446ba184c6be2295a7
-      internalID: 1817837008
+      spriteID: ec62c2037f68ee746b568451f909f0c2
+      internalID: -393667744
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player ATK Right 48x48_2
+      name: Enemy 1 Walk Right 48x48_2
       rect:
         serializedVersion: 2
         x: 96
@@ -178,26 +162,18 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 0, y: -24}
-        - {x: 24, y: 0}
-        - {x: 0, y: 24}
-        - {x: -24, y: 0}
-      physicsShape:
-      - - {x: 0, y: -24}
-        - {x: 24, y: 0}
-        - {x: 0, y: 24}
-        - {x: -24, y: 0}
+      outline: []
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0892b3b9c1644a0488066dd4095ee8af
-      internalID: -714704764
+      spriteID: f279236f6ce1f084d831cb4172bebc04
+      internalID: 1149821403
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player ATK Right 48x48_3
+      name: Enemy 1 Walk Right 48x48_3
       rect:
         serializedVersion: 2
         x: 144
@@ -207,20 +183,12 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 0, y: -24}
-        - {x: 24, y: 0}
-        - {x: 0, y: 24}
-        - {x: -24, y: 0}
-      physicsShape:
-      - - {x: 0, y: -24}
-        - {x: 24, y: 0}
-        - {x: 0, y: 24}
-        - {x: -24, y: 0}
+      outline: []
+      physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b83048baff88eda43bba29270ee57080
-      internalID: -1913464249
+      spriteID: 9683805f44013ff4e93cb4c4af840041
+      internalID: -2113258467
       vertices: []
       indices: 
       edges: []
@@ -236,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player ATK Right 48x48_0: 217155832
-      Player ATK Right 48x48_1: 1817837008
-      Player ATK Right 48x48_2: -714704764
-      Player ATK Right 48x48_3: -1913464249
+      Enemy 1 Walk Right 48x48_0: -730553376
+      Enemy 1 Walk Right 48x48_1: -393667744
+      Enemy 1 Walk Right 48x48_2: 1149821403
+      Enemy 1 Walk Right 48x48_3: -2113258467
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
