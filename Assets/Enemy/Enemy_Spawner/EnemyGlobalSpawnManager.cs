@@ -42,7 +42,10 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
 
         while (true)
         {
-            SpawnEnemyGroup(Random.Range(_spawnSettings.MinEnemiesPerSpawnWave, _spawnSettings.MaxEnemiesPerSpawnWave + 1));
+            for (int i = 0; i < _spawnSettings.WavesPerInterval; i++)
+            {
+                SpawnEnemyGroup(Random.Range(_spawnSettings.MinEnemiesPerSpawnWave, _spawnSettings.MaxEnemiesPerSpawnWave + 1));
+            }
 
             yield return wait;
         }

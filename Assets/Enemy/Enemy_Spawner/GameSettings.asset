@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bb0aacfa861ca647b6c463839cf3844, type: 3}
+  m_Name: GameSettings
+  m_EditorClassIdentifier: 
+  EnemySpawnSettings:
+    MaxEnemieCount: 200
+    MinEnemiesPerSpawnWave: 1
+    MaxEnemiesPerSpawnWave: 3
+    MinFastEnemiesPerSpawnWave: 0
+    MaxFastEnemiesPerSpawnWave: 0
+    SpawnIntervalMultiplier: 2
+    WavesPerInterval: 2
+  WaterSettings:
+    MaxOasisWaterCapacity: 400
+    MaxPlayerWaterCapacity: 50
+  TreeSettings:
+    TreeShootInterval: 0.25
+    TreeDamage: 5
+  DifficultySettingsEvery15Seconds:
+    SpawnIntervalMultiplierIncrease: 0.25
+    WavesPerIntervalIncrease: 0
+    MinEnemiesPerSpawnWaveIncrease: 0
+    MaxEnemiesPerSpawnWaveIncrease: 0
+    MinFastEnemiesPerSpawnWaveIncrease: 0
+    MaxFastEnemiesPerSpawnWaveIncrease: 0
+  DifficultySettingsEvery30Seconds:
+    SpawnIntervalMultiplierIncrease: 0
+    WavesPerIntervalIncrease: 0
+    MinEnemiesPerSpawnWaveIncrease: 0
+    MaxEnemiesPerSpawnWaveIncrease: 1
+    MinFastEnemiesPerSpawnWaveIncrease: 0
+    MaxFastEnemiesPerSpawnWaveIncrease: 1
+  DifficultySettingsEvery60Seconds:
+    SpawnIntervalMultiplierIncrease: -1
+    WavesPerIntervalIncrease: 1
+    MinEnemiesPerSpawnWaveIncrease: 1
+    MaxEnemiesPerSpawnWaveIncrease: -1
+    MinFastEnemiesPerSpawnWaveIncrease: 0
+    MaxFastEnemiesPerSpawnWaveIncrease: -1

@@ -8,4 +8,9 @@ public class GameSettings : ScriptableObject
     public WaterSettings WaterSettings;
 
     public TreeSettings TreeSettings;
+
+    public DifficultySettings DifficultySettingsEvery15Seconds;
+    public DifficultySettings DifficultySettingsEvery30Seconds;
+    public DifficultySettings DifficultySettingsEvery60Seconds;
 }
+

@@ -10,6 +10,7 @@ public class EnemySpawnSettings
     public int MinFastEnemiesPerSpawnWave;
     public int MaxFastEnemiesPerSpawnWave;
     public float SpawnIntervalMultiplier;
+    public int WavesPerInterval;
 
     public EnemySpawnSettings(EnemySpawnSettings enemySpawnSettings)
     {
@@ -19,5 +20,6 @@ public class EnemySpawnSettings
         MaxEnemiesPerSpawnWave = enemySpawnSettings.MaxEnemiesPerSpawnWave;
         MaxFastEnemiesPerSpawnWave = enemySpawnSettings.MaxFastEnemiesPerSpawnWave;
         MinFastEnemiesPerSpawnWave = enemySpawnSettings.MinFastEnemiesPerSpawnWave;
+        WavesPerInterval = enemySpawnSettings.WavesPerInterval;
     }
 }

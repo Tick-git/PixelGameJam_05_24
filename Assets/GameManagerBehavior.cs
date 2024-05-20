@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -52,23 +53,27 @@ public class GameManagerBehavior : MonoBehaviour
         }
     }
 
-    IEnumerator Start()
+    void Start()
     {
-        WaitForSeconds wait = new WaitForSeconds(15);
+        StartCoroutine(IncreaseDifficulty(new WaitForSeconds(15), _gameSettings.DifficultySettingsEvery15Seconds));
+        StartCoroutine(IncreaseDifficulty(new WaitForSeconds(30), _gameSettings.DifficultySettingsEvery30Seconds));
+        StartCoroutine(IncreaseDifficulty(new WaitForSeconds(60), _gameSettings.DifficultySettingsEvery60Seconds));
+    }
 
-        while(true)
+    private IEnumerator IncreaseDifficulty(WaitForSeconds wait, DifficultySettings difficultySettings)
+    {
+        while (true)
         {
             yield return wait;
 
-            EnemySpawnSettings.SpawnIntervalMultiplier += 0.5f;
-            EnemySpawnSettings.MaxEnemiesPerSpawnWave += 1;
-            EnemySpawnSettings.MinEnemiesPerSpawnWave += 1;
+            EnemySpawnSettings.SpawnIntervalMultiplier += difficultySettings.SpawnIntervalMultiplierIncrease;
+            EnemySpawnSettings.WavesPerInterval += difficultySettings.WavesPerIntervalIncrease;
 
-            yield return wait;
+            EnemySpawnSettings.MinEnemiesPerSpawnWave += difficultySettings.MinEnemiesPerSpawnWaveIncrease;
+            EnemySpawnSettings.MaxEnemiesPerSpawnWave += difficultySettings.MaxEnemiesPerSpawnWaveIncrease;
 
-            EnemySpawnSettings.MaxFastEnemiesPerSpawnWave += 1;
-            EnemySpawnSettings.MinFastEnemiesPerSpawnWave += 1;
+            EnemySpawnSettings.MinFastEnemiesPerSpawnWave += difficultySettings.MinFastEnemiesPerSpawnWaveIncrease;
+            EnemySpawnSettings.MaxFastEnemiesPerSpawnWave += difficultySettings.MaxFastEnemiesPerSpawnWaveIncrease;
         }
-    }
-
+    }   
 }

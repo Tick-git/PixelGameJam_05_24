@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour, IPlayerStats
     {
         MovementVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
-        if (Input.GetButton("Fire1") && _attackCooldown <= 0)
+        if (Input.GetKey(KeyCode.Space) && _attackCooldown <= 0)
         {
             _attackCooldown = _playerStats.AttackCooldown;
             List<Collider2D> colliders = new List<Collider2D>();

@@ -43,7 +43,7 @@ public class WaterExchangeBehavior : MonoBehaviour
     {
         _waterExchangeCooldownTimer += Time.deltaTime / _playerStats.WaterExchangeCooldown;       
 
-        if(_waterExchangeCooldownTimer > 1 && Input.GetKey(KeyCode.Space) && _waterReservoirsNearPlayer.Count > 0)
+        if(_waterExchangeCooldownTimer > 1 && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) && _waterReservoirsNearPlayer.Count > 0)
         {
             _waterReservoirsNearPlayer.Values.First().WaterReservoir.SetWater(_playerWaterReservoir.GetWater(1));
             _waterExchangeCooldownTimer = 0;
