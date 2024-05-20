@@ -27,7 +27,7 @@ MonoBehaviour:
     TreeShootInterval: 0.25
     TreeDamage: 5
   DifficultySettingsEvery15Seconds:
-    SpawnIntervalMultiplierIncrease: 0.25
+    SpawnIntervalMultiplierIncrease: 0.5
     WavesPerIntervalIncrease: 0
     MinEnemiesPerSpawnWaveIncrease: 0
     MaxEnemiesPerSpawnWaveIncrease: 0
@@ -41,7 +41,7 @@ MonoBehaviour:
     MinFastEnemiesPerSpawnWaveIncrease: 0
     MaxFastEnemiesPerSpawnWaveIncrease: 1
   DifficultySettingsEvery60Seconds:
-    SpawnIntervalMultiplierIncrease: -1
+    SpawnIntervalMultiplierIncrease: -1.5
     WavesPerIntervalIncrease: 1
     MinEnemiesPerSpawnWaveIncrease: 1
     MaxEnemiesPerSpawnWaveIncrease: -1

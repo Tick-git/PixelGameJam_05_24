@@ -36,12 +36,13 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
 
     IEnumerator Start()
     {
-        WaitForSeconds wait = new WaitForSeconds(10.0f / _spawnSettings.SpawnIntervalMultiplier);
         
         InstantiateEnemies();
 
         while (true)
         {
+            WaitForSeconds wait = new WaitForSeconds(10.0f / _spawnSettings.SpawnIntervalMultiplier);
+
             for (int i = 0; i < _spawnSettings.WavesPerInterval; i++)
             {
                 SpawnEnemyGroup(Random.Range(_spawnSettings.MinEnemiesPerSpawnWave, _spawnSettings.MaxEnemiesPerSpawnWave + 1));
