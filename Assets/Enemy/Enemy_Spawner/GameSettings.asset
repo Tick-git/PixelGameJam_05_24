@@ -24,7 +24,7 @@ MonoBehaviour:
     MaxOasisWaterCapacity: 400
     MaxPlayerWaterCapacity: 50
   TreeSettings:
-    TreeShootInterval: 0.075
+    TreeShootInterval: 0.15
     TreeDamage: 5
   DifficultySettingsEvery15Seconds:
     SpawnIntervalMultiplierIncrease: 0.5
