@@ -639,6 +639,10 @@ PrefabInstance:
       propertyPath: _startWater
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8848025580485784051, guid: 1966c4d17df0bec4dadfc8c7eda10197, type: 3}
+      propertyPath: _onWaterStatusChanged
+      value: 
+      objectReference: {fileID: 11400000, guid: 0e8166c3e2e32954da8b7866d4fb3571, type: 2}
     - target: {fileID: 1757634671429092770, guid: 1966c4d17df0bec4dadfc8c7eda10197, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -18,7 +18,7 @@ public class PlayerHealthSystem : MonoBehaviour, IDamageable
     {
         _currentHealth -= damage;
 
-        _onPlayerHealthChanged.Invoke(_currentHealth);
+        _onPlayerHealthChanged?.Invoke(_currentHealth);
 
         _playerSoundSystem.PlayPlayerIsHitSound();
     }

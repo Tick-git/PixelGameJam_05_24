@@ -3,12 +3,10 @@ using UnityEngine;
 
 public class WaterReservoirBehavior : MonoBehaviour, IWaterReservoir
 {
+    [SerializeField] FloatEventChannel _onWaterStatusChanged;
     [SerializeField] float _startWater;
 
     IWaterReservoir _waterReservoir;
-
-    public Action<float> OnWaterStatusChanged;
-
 
     private void Start()
     {
@@ -20,7 +18,7 @@ public class WaterReservoirBehavior : MonoBehaviour, IWaterReservoir
     {
         float newWaterAmount = _waterReservoir.GetWater(waterAmount);
 
-        OnWaterStatusChanged?.Invoke(_waterReservoir.GetWaterStatus());
+        _onWaterStatusChanged?.Invoke(_waterReservoir.GetWaterStatus());
 
         return newWaterAmount;
     }
@@ -34,7 +32,7 @@ public class WaterReservoirBehavior : MonoBehaviour, IWaterReservoir
     {
         _waterReservoir.SetWater(waterAmount);
 
-        OnWaterStatusChanged?.Invoke(_waterReservoir.GetWaterStatus());
+        _onWaterStatusChanged?.Invoke(_waterReservoir.GetWaterStatus());
     }
 
     public float GetMaxCapacity()

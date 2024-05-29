@@ -1,17 +1,12 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
-using UnityEngine.VFX;
 
 public class GameManagerBehavior : MonoBehaviour
 {
     [SerializeField] EnemyGlobalSpawnManager _enemyGlobalSpawnManager;
     [SerializeField] GameSettings _gameSettings;
-
-    PlayerHealthSystem _playerHealthSystem;
-    WaterReservoirBehavior _waterReservoirBehavior;
 
     public EnemySpawnSettings EnemySpawnSettings { get; private set; }
     public WaterSettings WaterSettings { get; private set; }
@@ -25,10 +20,6 @@ public class GameManagerBehavior : MonoBehaviour
         TreeSettings = new TreeSettings(_gameSettings.TreeSettings);
     }
 
-    private void OnDestroy()
-    {
-        _waterReservoirBehavior.OnWaterStatusChanged -= OnOasisWaterStatusChanged;
-    }
 
     public void OnOasisWaterStatusChanged(float newWaterStatus)
     {
@@ -104,10 +95,5 @@ public class GameManagerBehavior : MonoBehaviour
     internal void StartGame()
     {
         Instantiate(_enemyGlobalSpawnManager);
-
-        _playerHealthSystem = FindObjectOfType<PlayerHealthSystem>();
-        _waterReservoirBehavior = TransformHelper.FindRootTransform(FindObjectOfType<OasisSpreadBehavior>().transform).GetComponentInChildren<WaterReservoirBehavior>();
-
-        _waterReservoirBehavior.OnWaterStatusChanged += OnOasisWaterStatusChanged;
     }
 }

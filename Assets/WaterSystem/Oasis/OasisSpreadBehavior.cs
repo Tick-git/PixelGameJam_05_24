@@ -15,16 +15,10 @@ public class OasisSpreadBehavior : MonoBehaviour
         FindAllOasisExtensions();
 
         _oasisWaterReservoir = TransformHelper.FindRootTransform(transform).GetComponentInChildren<WaterReservoirBehavior>();
-        _oasisWaterReservoir.OnWaterStatusChanged += OnWaterStatusChanged;
         _oasisExtendedCount = 0;
     }
 
-    private void OnDestroy()
-    {
-        _oasisWaterReservoir.OnWaterStatusChanged -= OnWaterStatusChanged;
-    }
-
-    private void OnWaterStatusChanged(float newStatus)
+    public void OnWaterStatusChanged(float newStatus)
     {
         int nextExtensionLayer = _currentExtensionLayer + 1;
         float threshold = _oasisWaterReservoir.GetMaxCapacity() / _oasisExtensions.Count;
