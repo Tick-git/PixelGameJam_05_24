@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class PlayerHealthSystem : MonoBehaviour, IDamageable
 {
-    float _currentHealth = 100;
+    [SerializeField] FloatEventChannel _onPlayerHealthChanged;
 
-    public Action<float> OnHealthChanged;
+    float _currentHealth = 100;
 
     PlayerSoundSystem _playerSoundSystem;
 
@@ -18,7 +18,7 @@ public class PlayerHealthSystem : MonoBehaviour, IDamageable
     {
         _currentHealth -= damage;
 
-        OnHealthChanged(_currentHealth);
+        _onPlayerHealthChanged.Invoke(_currentHealth);
 
         _playerSoundSystem.PlayPlayerIsHitSound();
     }

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,17 +9,11 @@ public class PlayerHealthDisplay : MonoBehaviour
     private void Awake()
     {
         _playerHealthSystem = TransformHelper.FindRootTransform(FindAnyObjectByType<PlayerController>().transform).GetComponentInChildren<PlayerHealthSystem>();
-        _playerHealthSystem.OnHealthChanged += UpdateHealthDisplay;
         _healthBar = GetComponentInChildren<Slider>();
         _healthBar.value = 1;
     }
 
-    private void OnDestroy()
-    {
-        _playerHealthSystem.OnHealthChanged -= UpdateHealthDisplay;
-    }
-
-    private void UpdateHealthDisplay(float currentHealth)
+    public void UpdateHealthDisplay(float currentHealth)
     {
         _healthBar.value = currentHealth / _playerHealthSystem.GetMaxHealth();
     }

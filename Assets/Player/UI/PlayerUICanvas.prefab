@@ -85,6 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3640872981389893859}
   - component: {fileID: 2691143911486052204}
+  - component: {fileID: 8787473739721826520}
   m_Layer: 5
   m_Name: Healthbar
   m_TagString: Untagged
@@ -126,6 +127,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 888885f60c5923d479d5351f0114962c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8787473739721826520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4105555191030688257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b45f63e02d9343d45bb87bc191ba2a71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _channel: {fileID: 11400000, guid: 35ee6219bed05f541b68cfdb23e05087, type: 2}
+  _unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2691143911486052204}
+        m_TargetAssemblyTypeName: PlayerHealthDisplay, Scripts
+        m_MethodName: UpdateHealthDisplay
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5061112294239230475
 GameObject:
   m_ObjectHideFlags: 0

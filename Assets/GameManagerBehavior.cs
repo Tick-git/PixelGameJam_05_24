@@ -27,15 +27,22 @@ public class GameManagerBehavior : MonoBehaviour
 
     private void OnDestroy()
     {
-        _playerHealthSystem.OnHealthChanged -= OnPlayerHealthChanged;
         _waterReservoirBehavior.OnWaterStatusChanged -= OnOasisWaterStatusChanged;
     }
 
-    private void OnOasisWaterStatusChanged(float newWaterStatus)
+    public void OnOasisWaterStatusChanged(float newWaterStatus)
     {
         if(newWaterStatus >= _gameSettings.WaterSettings.MaxOasisWaterCapacity)
         {
             GameEnd(true);
+        }
+    }
+
+    public void OnPlayerHealthChanged(float newHealth)
+    {
+        if (newHealth <= 0)
+        {
+            GameEnd(false);
         }
     }
 
@@ -68,13 +75,7 @@ public class GameManagerBehavior : MonoBehaviour
 
     }
 
-    private void OnPlayerHealthChanged(float newHealth)
-    {
-        if(newHealth <= 0)
-        {
-            GameEnd(false);
-        }
-    }
+  
 
     void Start()
     {
@@ -107,7 +108,6 @@ public class GameManagerBehavior : MonoBehaviour
         _playerHealthSystem = FindObjectOfType<PlayerHealthSystem>();
         _waterReservoirBehavior = TransformHelper.FindRootTransform(FindObjectOfType<OasisSpreadBehavior>().transform).GetComponentInChildren<WaterReservoirBehavior>();
 
-        _playerHealthSystem.OnHealthChanged += OnPlayerHealthChanged;
         _waterReservoirBehavior.OnWaterStatusChanged += OnOasisWaterStatusChanged;
     }
 }
