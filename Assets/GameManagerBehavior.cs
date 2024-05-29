@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
+[DefaultExecutionOrder(-1)]
 public class GameManagerBehavior : MonoBehaviour
 {
-    [SerializeField] EnemyGlobalSpawnManager _enemyGlobalSpawnManager;
     [SerializeField] GameSettings _gameSettings;
 
     public EnemySpawnSettings EnemySpawnSettings { get; private set; }
@@ -20,34 +20,17 @@ public class GameManagerBehavior : MonoBehaviour
         TreeSettings = new TreeSettings(_gameSettings.TreeSettings);
     }
 
-
-    public void OnOasisWaterStatusChanged(float newWaterStatus)
-    {
-        if(newWaterStatus >= _gameSettings.WaterSettings.MaxOasisWaterCapacity)
-        {
-            GameEnd(true);
-        }
-    }
-
-    public void OnPlayerHealthChanged(float newHealth)
-    {
-        if (newHealth <= 0)
-        {
-            GameEnd(false);
-        }
-    }
-
-    private void GameEnd(bool playerHasWon)
+    private void EndGame(bool playerHasWon)
     {
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
         root.Q<VisualElement>("root").style.display = DisplayStyle.Flex;
         Time.timeScale = 0;
-        
-        if(playerHasWon)
+
+        if (playerHasWon)
         {
             root.Q<VisualElement>("YouWon").style.display = DisplayStyle.Flex;
             root.Q<VisualElement>("GameOver").style.display = DisplayStyle.None;
-        } 
+        }
         else
         {
             root.Q<VisualElement>("YouWon").style.display = DisplayStyle.None;
@@ -64,15 +47,6 @@ public class GameManagerBehavior : MonoBehaviour
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
-    }
-
-  
-
-    void Start()
-    {
-        StartCoroutine(IncreaseDifficulty(new WaitForSeconds(15), _gameSettings.DifficultySettingsEvery15Seconds));
-        StartCoroutine(IncreaseDifficulty(new WaitForSeconds(30), _gameSettings.DifficultySettingsEvery30Seconds));
-        StartCoroutine(IncreaseDifficulty(new WaitForSeconds(60), _gameSettings.DifficultySettingsEvery60Seconds));
     }
 
     private IEnumerator IncreaseDifficulty(WaitForSeconds wait, DifficultySettings difficultySettings)
@@ -92,8 +66,31 @@ public class GameManagerBehavior : MonoBehaviour
         }
     }
 
-    internal void StartGame()
+
+    #region EventMethods
+
+    public void OnOasisWaterStatusChanged(float newWaterStatus)
     {
-        Instantiate(_enemyGlobalSpawnManager);
+        if (newWaterStatus >= _gameSettings.WaterSettings.MaxOasisWaterCapacity)
+        {
+            EndGame(true);
+        }
     }
+
+    public void OnPlayerHealthChanged(float newHealth)
+    {
+        if (newHealth <= 0)
+        {
+            EndGame(false);
+        }
+    }
+
+    public void OnStartGame(Empty empty)
+    {
+        StartCoroutine(IncreaseDifficulty(new WaitForSeconds(15), _gameSettings.DifficultySettingsEvery15Seconds));
+        StartCoroutine(IncreaseDifficulty(new WaitForSeconds(30), _gameSettings.DifficultySettingsEvery30Seconds));
+        StartCoroutine(IncreaseDifficulty(new WaitForSeconds(60), _gameSettings.DifficultySettingsEvery60Seconds));
+    }
+
+    #endregion
 }

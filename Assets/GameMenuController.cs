@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 public class GameMenuController : MonoBehaviour
 {
     [SerializeField] AudioMixer _audioMixer;
+    [SerializeField] EventChannel _onGameStartEvent;
 
     VisualElement _root;
 
@@ -43,9 +44,6 @@ public class GameMenuController : MonoBehaviour
         {
             _muteButton.text = "Unmute";
         }
-
-        _gameManager = FindObjectOfType<GameManagerBehavior>();
-
     }
 
     private void Start()
@@ -104,9 +102,9 @@ public class GameMenuController : MonoBehaviour
         if(!_gameRunning)
         {
             ChangeGameMenuDisplayStatus();
+            _onGameStartEvent.Invoke(new Empty());
             _gameRunning = true;
             _startButton.text = "Restart";
-            _gameManager.StartGame();
             _continueButton.style.display = DisplayStyle.Flex;
         } 
         else

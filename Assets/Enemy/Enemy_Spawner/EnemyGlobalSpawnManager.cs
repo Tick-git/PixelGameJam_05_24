@@ -32,12 +32,12 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
 
         _playerController = FindObjectOfType<PlayerController>();
         _waterdropManager = FindObjectOfType<WaterdropSpawnpoolBehavior>();
+
+        InstantiateEnemies();
     }
 
-    IEnumerator Start()
-    {      
-        InstantiateEnemies();
-
+    IEnumerator StartEnemySpawning()
+    {
         while (true)
         {
             WaitForSeconds wait = new WaitForSeconds(10.0f / _spawnSettings.SpawnIntervalMultiplier);
@@ -49,7 +49,7 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
 
             yield return wait;
         }
-    }    
+    }
 
     private void SpawnEnemyGroup(int groupSize)
     {
@@ -182,5 +182,10 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
         SetEnemyInactive(enemy, enemy.GetComponent<IEnemyType>().GetEnemyType());
 
         _waterdropManager.SpawnWaterdrop(enemy.transform.position);
+    }
+
+    public void OnGameStart(Empty empty)
+    {
+        StartCoroutine(StartEnemySpawning());
     }
 }
