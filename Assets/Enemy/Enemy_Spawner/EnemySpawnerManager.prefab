@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4406966541464450668}
   - component: {fileID: -2190656626193535608}
+  - component: {fileID: -2188837155956617614}
   m_Layer: 0
   m_Name: EnemySpawnerManager
   m_TagString: Untagged
@@ -46,4 +47,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyEasyPrefab: {fileID: 8212881053392953693, guid: 8d869fa690f04c9408d4734806c63ac6, type: 3}
   _enemyFastPrefab: {fileID: 2769199845706662708, guid: 7882dc349420c984698ad89adf7ce8fa, type: 3}
-  _spawnSettings: {fileID: 11400000, guid: d882fbb6db30ae440a706f263658d1ea, type: 2}
+--- !u!114 &-2188837155956617614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2754900347753962326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43f4f96b990f0894fa55200e13fb25c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _channel: {fileID: 11400000, guid: 4c95212fd91a8be4bbfbd25313225c19, type: 2}
+  _unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -2190656626193535608}
+        m_TargetAssemblyTypeName: EnemyGlobalSpawnManager, Scripts
+        m_MethodName: DespawnEnemy
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

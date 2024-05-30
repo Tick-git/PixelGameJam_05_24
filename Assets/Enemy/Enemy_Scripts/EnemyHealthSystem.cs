@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
@@ -7,16 +6,13 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable, IEnemyType
     [SerializeField] float _maxHealth = 20;
     [SerializeField] float _knockbackForce = 10f;
     [SerializeField] EnemyType _enemyType;
+    [SerializeField] GameObjectEventChannel _onEnemyDeath;
 
     Rigidbody2D _rb;
 
     SpriteRenderer _spriteRenderer;
 
-    EnemyGlobalSpawnManager _enemySpawnManager;
-
     SteeringBehaviorBase _steeringBehaviorBase;
-
-    AudioSource _audioSource;
 
     float _currentHealth;
 
@@ -29,14 +25,12 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable, IEnemyType
         _rb = GetComponent<Rigidbody2D>();    
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _steeringBehaviorBase = GetComponent<SteeringBehaviorBase>();
-        _audioSource = GetComponent<AudioSource>();
         _enemyDamageSystem = GetComponent<EnemyDamageSystem>();
         _startColor = _spriteRenderer.color;
     }
 
     private void Start()
     {
-        _enemySpawnManager = FindObjectOfType<EnemyGlobalSpawnManager>();
         _currentHealth = _maxHealth;
     }
 
@@ -60,7 +54,7 @@ public class EnemyHealthSystem : MonoBehaviour, IDamageable, IEnemyType
         if (_currentHealth <= 0)
         {
             StopAllCoroutines();
-            _enemySpawnManager.DespawnEnemy(gameObject);
+            _onEnemyDeath.Invoke(gameObject);
             _currentHealth = _maxHealth;
             _steeringBehaviorBase.enabled = false;
             _enemyDamageSystem.enabled = false;

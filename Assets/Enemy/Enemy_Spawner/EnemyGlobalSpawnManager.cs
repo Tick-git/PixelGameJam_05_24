@@ -16,10 +16,6 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
     Queue<GameObject> _inactiveSlowEnemieQueue;
     Queue<GameObject> _inactiveFastEnemieQueue;
 
-    PlayerController _playerController;
-
-    WaterdropSpawnpoolBehavior _waterdropManager;
-
     private void Awake()
     {
         _spawnSettings = FindObjectOfType<GameManagerBehavior>().EnemySpawnSettings;
@@ -29,9 +25,6 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
 
         _inactiveSlowEnemieQueue = new Queue<GameObject>();
         _inactiveFastEnemieQueue = new Queue<GameObject>();
-
-        _playerController = FindObjectOfType<PlayerController>();
-        _waterdropManager = FindObjectOfType<WaterdropSpawnpoolBehavior>();
 
         InstantiateEnemies();
     }
@@ -87,20 +80,6 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
         }
 
         return spawnPositions.ToList();
-    }
-
-    private Vector2 GetGroupSpawnPosition()
-    {
-        Vector2 playerMovementVector = _playerController.MovementVector;
-
-        if(playerMovementVector == Vector2.zero)
-        {
-            playerMovementVector = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1));
-        }
-
-        Vector2 nextSpawnPos = Quaternion.Euler(0, 0, Random.Range(-45, 45)) * playerMovementVector * Random.Range(2, 6);
-
-        return (Vector2) _playerController.transform.position + nextSpawnPos;
     }
 
     private List<GameObject> GetInactiveEnemies(int groupSize)
@@ -177,11 +156,9 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
         enemy.SetActive(false);
     }
 
-    internal void DespawnEnemy(GameObject enemy)
+    public void DespawnEnemy(GameObject enemy)
     {
         SetEnemyInactive(enemy, enemy.GetComponent<IEnemyType>().GetEnemyType());
-
-        _waterdropManager.SpawnWaterdrop(enemy.transform.position);
     }
 
     public void OnGameStart(Empty empty)

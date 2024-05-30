@@ -178,6 +178,7 @@ MonoBehaviour:
   _maxHealth: 20
   _knockbackForce: 7.5
   _enemyType: 0
+  _onEnemyDeath: {fileID: 11400000, guid: 4c95212fd91a8be4bbfbd25313225c19, type: 2}
 --- !u!114 &7318819057909851628
 MonoBehaviour:
   m_ObjectHideFlags: 0

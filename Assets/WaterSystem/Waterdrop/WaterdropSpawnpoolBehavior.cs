@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class WaterdropSpawnpoolBehavior : MonoBehaviour
@@ -19,9 +18,7 @@ public class WaterdropSpawnpoolBehavior : MonoBehaviour
         _waterdropPositionWhileInactive = new Vector2(-100, -100);
         _inactiveWaterdropsQueue = new Queue<GameObject>();
         _waterdropParent = new GameObject("Waterdrops").transform;
-        _waterdropSoundSystem = FindObjectOfType<WaterdropSoundSystem>();
-
-        
+        _waterdropSoundSystem = FindObjectOfType<WaterdropSoundSystem>();      
     }
 
     private void Start()
@@ -43,7 +40,7 @@ public class WaterdropSpawnpoolBehavior : MonoBehaviour
         _inactiveWaterdropsQueue.Enqueue(waterdrop);
     }
 
-    public void SpawnWaterdrop(Vector2 position)
+    public void SpawnWaterdropOnGameobjectPosition(GameObject gameObject)
     {
         if (_inactiveWaterdropsQueue.Count == 0)
         {
@@ -52,7 +49,7 @@ public class WaterdropSpawnpoolBehavior : MonoBehaviour
 
         GameObject waterdrop = _inactiveWaterdropsQueue.Dequeue();
 
-        waterdrop.transform.position = position;
+        waterdrop.transform.position = gameObject.transform.position;
         waterdrop.SetActive(true);
     }
 
