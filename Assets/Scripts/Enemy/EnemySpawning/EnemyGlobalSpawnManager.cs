@@ -5,31 +5,31 @@ using UnityEngine;
 
 public class EnemyGlobalSpawnManager : MonoBehaviour
 {
-    [SerializeField] GameObject _enemyEasyPrefab;
-    [SerializeField] GameObject _enemyFastPrefab;
+    [SerializeField] EnemyFactory _enemyNormalFactory;
+    [SerializeField] EnemyFactory _enemyFastFactory;
     
     EnemySpawnSettings _spawnSettings;
+    ISpawnPointStrategy _spawnPointStrategy;
 
     Transform _enemyParentTransform;
-    Vector2 _enemyPositionWhileInactive;
 
     Queue<GameObject> _inactiveSlowEnemieQueue;
     Queue<GameObject> _inactiveFastEnemieQueue;
 
-    // Aufgaben:
+    // Aufgaben auslagern:
     //
-    // Objectpool 
-    // Instanzierung der Enemies
-    // Spawnen der Enemies
-    // Despawnen der Enemies
-    // Spawnposition bestimmen
+    // [X] Spawnposition bestimmen
+    // [X] Instanzierung der Enemies
+    // [ ] Objectpool 
+    // [ ] Spawnen der Enemies
+    // [ ] Despawnen der Enemies
 
 
     private void Awake()
     {
         _spawnSettings = FindObjectOfType<GameManagerBehavior>().EnemySpawnSettings;
 
-        _enemyPositionWhileInactive = new Vector2(-100, -100);
+        _spawnPointStrategy = new RandomSpawnPointStrategy();
         _enemyParentTransform = new GameObject("Enemies").transform;
 
         _inactiveSlowEnemieQueue = new Queue<GameObject>();
@@ -55,7 +55,7 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
 
     private void SpawnEnemyGroup(int groupSize)
     {
-        Vector2 groupSpawnPosition = GetRandomGroupSpawnPosition();
+        Vector2 groupSpawnPosition = _spawnPointStrategy.GetSpawnPoint();
 
         List<GameObject> enemies = GetInactiveEnemies(groupSize);
         List<Vector2> spawnPositions = GetDifferentPositionsCircle(groupSize, 0.5f);
@@ -65,11 +65,6 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
             enemies[i].transform.position = groupSpawnPosition + spawnPositions.ElementAt(i);
             enemies[i].SetActive(true);
         }
-    }
-
-    private Vector2 GetRandomGroupSpawnPosition()
-    {
-        return Random.insideUnitCircle * 6.0f;
     }
 
     private static List<Vector2> GetDifferentPositionsCircle(int positionCount, float radius)
@@ -120,32 +115,19 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
     {
         for (int i = 0; i < _spawnSettings.MaxEnemieCount; i++)
         {
+            GameObject enemy;
+
             if (i % 2 == 0)
             {
-                InstantiateFastEnemy();
+                enemy = _enemyFastFactory.CreateEnemy(_enemyParentTransform);
             }
             else
             {
-                InstantiateEasyEnemy();
+                enemy = _enemyNormalFactory.CreateEnemy(_enemyParentTransform);
             }
+
+            SetEnemyInactive(enemy, enemy.GetComponent<IEnemyType>().GetEnemyType());
         }
-    }
-
-    private void InstantiateEasyEnemy()
-    {
-        InstantiateEnemy(_enemyEasyPrefab, EnemyType.Normal);
-
-    }
-    private void InstantiateFastEnemy()
-    {
-        InstantiateEnemy(_enemyFastPrefab, EnemyType.Fast);
-    }
-
-    private void InstantiateEnemy(GameObject enemyPrefab, EnemyType type)
-    {
-        GameObject enemy = Instantiate(enemyPrefab, _enemyPositionWhileInactive, Quaternion.identity, _enemyParentTransform);
-
-        SetEnemyInactive(enemy, type);
     }
 
     private void SetEnemyInactive(GameObject enemy, EnemyType type)
@@ -175,3 +157,20 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
         StartCoroutine(StartEnemySpawning());
     }
 }
+
+public interface ISpawnPointStrategy
+{
+    Vector2 GetSpawnPoint();
+}
+
+public class RandomSpawnPointStrategy : ISpawnPointStrategy
+{
+    public Vector2 GetSpawnPoint()
+    {
+        return Random.insideUnitCircle * 6.0f;
+    }
+}
+
+
+
+
