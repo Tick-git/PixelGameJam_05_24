@@ -5,6 +5,6 @@
 
 public enum EnemyType
 {
-    Normal,
-    Fast
+    NormalEnemy,
+    FastEnemy
 }

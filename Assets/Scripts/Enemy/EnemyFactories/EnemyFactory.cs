@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class EnemyFactory : ScriptableObject
+public abstract class EnemyFactory : ScriptableObject, IEnemyFactory
 {
     [SerializeField] EnemyType _enemyType;
     [SerializeField] protected GameObject _enemyPrefab;
@@ -9,8 +9,6 @@ public abstract class EnemyFactory : ScriptableObject
     public EnemyType EnemyType => _enemyType;
 
     public abstract GameObject CreateEnemy(Transform parent);
-
-
 }
 
 

@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class WaterdropBehavior : MonoBehaviour, IWaterCollectable
 {
-    WaterdropSpawnpoolBehavior _waterdropManager;
+    WaterdropSpawnBehavior _waterdropManager;
 
     private void Awake()
     {
-        _waterdropManager = FindObjectOfType<WaterdropSpawnpoolBehavior>();
+        _waterdropManager = FindObjectOfType<WaterdropSpawnBehavior>();
     }
 
     private void OnEnable()

@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2103913016828181775}
-  - component: {fileID: 7862989422724525832}
+  - component: {fileID: 8554487907010126117}
   - component: {fileID: 3683830289010511631}
+  - component: {fileID: 5624875975046398585}
   - component: {fileID: 6148955771580361835}
   - component: {fileID: 3690045679825686279}
   - component: {fileID: 8172017274120064252}
@@ -37,7 +38,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7862989422724525832
+--- !u!114 &8554487907010126117
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,11 +47,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4817192650839335567}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6af2acdc5c5a96040971e680ab556c9a, type: 3}
+  m_Script: {fileID: 11500000, guid: b5981618d190f1e4383173c93149630b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterdropPrefab: {fileID: 261895913438065248, guid: a442cf945be596a4aa151cd165146fba, type: 3}
-  enemySpawnSettings: {fileID: 11400000, guid: d882fbb6db30ae440a706f263658d1ea, type: 2}
+  _waterdropFactory: {fileID: 11400000, guid: dd4508a7353768f4f832f705b72aad2c, type: 2}
 --- !u!114 &3683830289010511631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,8 +63,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 745398e75f57c204cb07e9899114af15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waterdropCollectSound: {fileID: 0}
-  _volume: 0.1
+  _waterdropCollectSound: {fileID: 8300000, guid: 2f91bccd47635af4b8e393a49f36e128, type: 3}
+  _volume: 0.0125
+--- !u!114 &5624875975046398585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4817192650839335567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43f4f96b990f0894fa55200e13fb25c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _channel: {fileID: 11400000, guid: 4c95212fd91a8be4bbfbd25313225c19, type: 2}
+  _unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8554487907010126117}
+        m_TargetAssemblyTypeName: WaterdropSpawnBehavior, Scripts
+        m_MethodName: SpawnWaterdropOnGameobjectPosition
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!82 &6148955771580361835
 AudioSource:
   m_ObjectHideFlags: 0
@@ -74,7 +102,7 @@ AudioSource:
   m_GameObject: {fileID: 4817192650839335567}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 097c7805903bcba43a55396b62517a27, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -170,7 +198,7 @@ AudioSource:
   m_GameObject: {fileID: 4817192650839335567}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 097c7805903bcba43a55396b62517a27, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -266,7 +294,7 @@ AudioSource:
   m_GameObject: {fileID: 4817192650839335567}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 097c7805903bcba43a55396b62517a27, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -362,7 +390,7 @@ AudioSource:
   m_GameObject: {fileID: 4817192650839335567}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 097c7805903bcba43a55396b62517a27, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1

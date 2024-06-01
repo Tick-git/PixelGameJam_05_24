@@ -5,7 +5,7 @@ public class EnemyObjectPools
 {
     Dictionary<EnemyType, EnemyObjectPool> _enemyObjectPools;
 
-    public EnemyObjectPools(EnemyFactory[] enemyFactories, int preInstantiationCount)
+    public EnemyObjectPools(IEnemyFactory[] enemyFactories, int preInstantiationCount)
     {
         _enemyObjectPools = new Dictionary<EnemyType, EnemyObjectPool>();
 
@@ -19,7 +19,7 @@ public class EnemyObjectPools
     {
         foreach (var pool in _enemyObjectPools.Values)
         {
-            pool.PreInstantiateEnemies();
+            pool.InstantiateGameObjects();
         }
     }
 

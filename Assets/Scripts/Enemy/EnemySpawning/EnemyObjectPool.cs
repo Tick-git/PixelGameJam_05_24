@@ -1,62 +1,14 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class EnemyObjectPool
+public class EnemyObjectPool : GameObjectPool
 {
-    Stack<GameObject> _inactiveEnemies;
-    EnemyFactory _enemyFactory;
+    IEnemyFactory _enemyFactory;
     Transform _enemyParentTransform;
-    int _preInstantiationCount;
 
-
-    public EnemyObjectPool(EnemyFactory enemyFactory, int preInstantiationCount)
+    public EnemyObjectPool(IEnemyFactory enemyFactory, int preInstantiationCount) : base(preInstantiationCount)
     {
         _enemyFactory = enemyFactory;
-        _enemyParentTransform = new GameObject(_enemyFactory.name).transform;
-        _preInstantiationCount = preInstantiationCount;
-        _inactiveEnemies = new Stack<GameObject>(preInstantiationCount);
-    }
-
-    public int CountInactive => _inactiveEnemies.Count;
-
-    public void PreInstantiateEnemies()
-    {
-        for (int i = 0; i < _preInstantiationCount; i++)
-        {
-            Release(_enemyFactory.CreateEnemy(_enemyParentTransform));
-        }
-    }
-
-    public void Clear()
-    {
-        foreach (var enemy in _inactiveEnemies)
-        {
-            Object.Destroy(enemy);
-        }
-
-        _inactiveEnemies.Clear();
-    }
-
-    public GameObject Get()
-    {
-        GameObject enemy;
-
-        if (_inactiveEnemies.Count == 0)
-        {
-            _inactiveEnemies.Push(_enemyFactory.CreateEnemy(_enemyParentTransform));
-        }
-
-        enemy = _inactiveEnemies.Pop();
-        enemy.SetActive(true);
-
-        return enemy;
-    }
-
-    public void Release(GameObject enemy)
-    {
-        enemy.SetActive(false);
-
-        _inactiveEnemies.Push(enemy);
+        _enemyParentTransform = new GameObject(_enemyFactory.EnemyType.ToString()).transform;
     }
 
     public GameObject[] GetMultiple(int count)
@@ -69,6 +21,11 @@ public class EnemyObjectPool
         }
 
         return enemies;
+    }
+
+    protected override GameObject CreateObject()
+    {
+        return _enemyFactory.CreateEnemy(_enemyParentTransform);
     }
 }
 

@@ -15,10 +15,7 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
 
     // Aufgaben auslagern:
     //
-    // [X] Spawnposition bestimmen
-    // [X] Instanzierung der Enemies
-    // [X] Objectpool 
-    // [ ] Spawnen der Enemies
+    // [ ] Bestimmung der Gegnerverteilung in einer Gruppe
     // [ ] Despawnen der Enemies
 
     private void Awake()
@@ -66,8 +63,8 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
 
         List<GameObject> enemies = new List<GameObject>();
 
-        enemies.AddRange(_enemySpawnPools.GetMultiple(EnemyType.Fast, fastEnemieCount));
-        enemies.AddRange(_enemySpawnPools.GetMultiple(EnemyType.Normal, normalEnemieCount));
+        enemies.AddRange(_enemySpawnPools.GetMultiple(EnemyType.FastEnemy, fastEnemieCount));
+        enemies.AddRange(_enemySpawnPools.GetMultiple(EnemyType.NormalEnemy, normalEnemieCount));
         
         return enemies;
     }
@@ -82,5 +79,3 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
         StartCoroutine(EnemySpawningLoop());
     }
 }
-
-
