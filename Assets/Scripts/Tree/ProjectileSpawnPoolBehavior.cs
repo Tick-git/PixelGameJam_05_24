@@ -1,54 +1,28 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectSpawnPoolBehavior : MonoBehaviour
+public class ProjectileSpawnPoolBehavior : MonoBehaviour
 {
-    [SerializeField] GameObject _projectilePrefab;
+    [SerializeField] ProjectileFactory _projectileFactory;
 
-    Queue<GameObject> _inactiveProjectiles;
-
-    Vector2 _projectilePositionWhileInactive;
+    ProjectGameObjectPool _projectilePool;
 
     private void Awake()
     {
-        _projectilePositionWhileInactive = new Vector2(-100, -100);
-        _inactiveProjectiles = new Queue<GameObject>();
-
-        for (int i = 0; i < 100; i++)
-        {
-            InstantiateProjectile();
-        }
-    }
-
-    private void InstantiateProjectile()
-    {
-        GameObject projectile = Instantiate(_projectilePrefab, _projectilePositionWhileInactive, Quaternion.identity, transform);
-
-        projectile.SetActive(false);
-
-        _inactiveProjectiles.Enqueue(projectile);
+        _projectilePool = new ProjectGameObjectPool(_projectileFactory, 100);
+        _projectilePool.InstantiateGameObjects();
     }
 
     public GameObject SpawnProjectile(Vector2 position)
     {
-        if (_inactiveProjectiles.Count == 0)
-        {
-            InstantiateProjectile();
-        }
-
-        GameObject projectile = _inactiveProjectiles.Dequeue();
+        GameObject projectile = _projectilePool.Get();
 
         projectile.transform.position = position;
-        projectile.SetActive(true);
 
         return projectile;
     }
 
     internal void DespawnProjectile(GameObject gameObject)
     {
-        gameObject.SetActive(false);
-        gameObject.transform.position = _projectilePositionWhileInactive;
-        _inactiveProjectiles.Enqueue(gameObject);
+        _projectilePool.Release(gameObject);
     }
 }

@@ -5,13 +5,13 @@ public class ProjectileBehavior : MonoBehaviour
 {
     [SerializeField] float _speed = 5f;
 
-    private static ProjectSpawnPoolBehavior _projectSpawnPoolBehavior;
+    private static ProjectileSpawnPoolBehavior _projectSpawnPoolBehavior;
 
     private void Awake()
     {
         if (_projectSpawnPoolBehavior == null)
         {
-            _projectSpawnPoolBehavior = FindObjectOfType<ProjectSpawnPoolBehavior>();
+            _projectSpawnPoolBehavior = FindObjectOfType<ProjectileSpawnPoolBehavior>();
         }
     }
 
@@ -22,7 +22,7 @@ public class ProjectileBehavior : MonoBehaviour
 
     private IEnumerator HandleShoot(Transform target, int damage)
     {
-        while(Vector3.Distance(transform.position, target.position) > 0.05f)
+        while(Vector3.Distance(transform.position, target.position) > 0.05f && target.gameObject.activeSelf)
         {
             transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime) ;
             yield return null;
