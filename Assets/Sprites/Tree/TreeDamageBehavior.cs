@@ -12,7 +12,7 @@ public class TreeDamageBehavior : MonoBehaviour
     [SerializeField] LayerMask _enemyLayerMask;
     [SerializeField] GameObject _projctile;
 
-    private static ProjectSpawnPoolBehavior _projectSpawnPoolBehavior;
+    private static ProjectileSpawnPoolBehavior _projectSpawnPoolBehavior;
 
     Collider2D _attackRadiusCollider;
 
@@ -24,7 +24,7 @@ public class TreeDamageBehavior : MonoBehaviour
     {
         if (_projectSpawnPoolBehavior == null)
         {
-            _projectSpawnPoolBehavior = FindObjectOfType<ProjectSpawnPoolBehavior>();
+            _projectSpawnPoolBehavior = FindObjectOfType<ProjectileSpawnPoolBehavior>();
         }
 
         _attackRadiusCollider = GetComponent<Collider2D>();

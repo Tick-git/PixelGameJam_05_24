@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using UnityEngine;
 
 public class EnemyGlobalSpawnManager : MonoBehaviour
 {
+    [SerializeField] Vector2EventChannel _enemyDespawnEvent;
     [SerializeField] EnemyFactory[] _enemyFactories;
 
     EnemyObjectPools _enemySpawnPools;    
@@ -71,6 +73,7 @@ public class EnemyGlobalSpawnManager : MonoBehaviour
 
     public void DespawnEnemy(GameObject enemy)
     {
+        _enemyDespawnEvent.Invoke(enemy.transform.position);
         _enemySpawnPools.Release(enemy);
     }
 

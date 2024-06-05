@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2103913016828181775}
   - component: {fileID: 8554487907010126117}
   - component: {fileID: 3683830289010511631}
-  - component: {fileID: 5624875975046398585}
+  - component: {fileID: 7205240623011417976}
   - component: {fileID: 6148955771580361835}
   - component: {fileID: 3690045679825686279}
   - component: {fileID: 8172017274120064252}
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _waterdropCollectSound: {fileID: 8300000, guid: 2f91bccd47635af4b8e393a49f36e128, type: 3}
   _volume: 0.0125
---- !u!114 &5624875975046398585
+--- !u!114 &7205240623011417976
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,10 +74,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4817192650839335567}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43f4f96b990f0894fa55200e13fb25c4, type: 3}
+  m_Script: {fileID: 11500000, guid: a86e3e85e2f94e64aa25ff3ba0a251ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _channel: {fileID: 11400000, guid: 4c95212fd91a8be4bbfbd25313225c19, type: 2}
+  _channel: {fileID: 11400000, guid: 2e475dea21b0a254ab0ada19767f03c4, type: 2}
   _unityEvent:
     m_PersistentCalls:
       m_Calls:

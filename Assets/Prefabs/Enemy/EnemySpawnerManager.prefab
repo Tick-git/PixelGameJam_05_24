@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4406966541464450668}
   - component: {fileID: -2190656626193535608}
   - component: {fileID: -2188837155956617614}
+  - component: {fileID: 5870417733949652916}
   m_Layer: 0
   m_Name: EnemySpawnerManager
   m_TagString: Untagged
@@ -45,8 +46,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74625f3f9a2ceaf4fb5214b9de6d3eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyEasyPrefab: {fileID: 8212881053392953693, guid: 8d869fa690f04c9408d4734806c63ac6, type: 3}
-  _enemyFastPrefab: {fileID: 2769199845706662708, guid: 7882dc349420c984698ad89adf7ce8fa, type: 3}
+  _enemyDespawnEvent: {fileID: 11400000, guid: 2e475dea21b0a254ab0ada19767f03c4, type: 2}
+  _enemyFactories:
+  - {fileID: 11400000, guid: ed66f933ca0c65847b2e60594b25cdf7, type: 2}
+  - {fileID: 11400000, guid: 1f17516ec4a60544da7b568cb54eea0f, type: 2}
 --- !u!114 &-2188837155956617614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,6 +69,34 @@ MonoBehaviour:
       - m_Target: {fileID: -2190656626193535608}
         m_TargetAssemblyTypeName: EnemyGlobalSpawnManager, Scripts
         m_MethodName: DespawnEnemy
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5870417733949652916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2754900347753962326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56dc532636d98ca4f9c3999fb40ade16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _channel: {fileID: 11400000, guid: 4bfbd46c6e2487846a3a54e9e0ab9561, type: 2}
+  _unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -2190656626193535608}
+        m_TargetAssemblyTypeName: EnemyGlobalSpawnManager, Scripts
+        m_MethodName: OnGameStart
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -18,11 +18,9 @@ public class WaterdropSpawnBehavior : MonoBehaviour
         _waterdropPool.InstantiateGameObjects();
     }
 
-    public void SpawnWaterdropOnGameobjectPosition(GameObject gameObject)
+    public void SpawnWaterdropOnGameobjectPosition(Vector2 spawnPosition)
     {
-        GameObject waterdrop = _waterdropPool.Get();
-
-        waterdrop.transform.position = gameObject.transform.position;
+        _waterdropPool.Get().transform.position = spawnPosition;
     }
 
     internal void DespawnWaterdrop(GameObject gameObject)

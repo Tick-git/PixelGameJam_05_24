@@ -1,4 +1,4 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "Events/GameObjectEventChannel")]
+[CreateAssetMenu(menuName = "Events/GameObjectChannel")]
 public class GameObjectEventChannel : EventChannel<GameObject> { }
