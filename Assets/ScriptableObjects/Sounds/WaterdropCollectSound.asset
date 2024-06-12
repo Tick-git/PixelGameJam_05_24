@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b031b973d4fa2e84896d1b5d57c7cd85, type: 3}
+  m_Name: WaterdropCollectSound
+  m_EditorClassIdentifier: 
+  Clip: {fileID: 8300000, guid: 2f91bccd47635af4b8e393a49f36e128, type: 3}
+  MixerGroup: {fileID: 24300002, guid: 097c7805903bcba43a55396b62517a27, type: 2}
+  Loop: 0
+  PlayOnAwake: 0
+  Volume: 0.1
+  Pitch: 1

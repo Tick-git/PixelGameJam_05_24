@@ -5,41 +5,20 @@ using UnityEngine;
 
 public class WaterdropSoundSystem : MonoBehaviour
 {
-    [SerializeField] AudioClip _waterdropCollectSound;
-    [SerializeField] float _volume = 0.1f;
+    [SerializeField] SoundData _soundData;
 
-    Queue<AudioSource> _audioSources;
 
     private void Awake()
     {
-        _audioSources = new Queue<AudioSource>();
-
-        foreach(AudioSource audioSource in GetComponents<AudioSource>())
-        {
-            audioSource.clip = _waterdropCollectSound;
-            audioSource.volume = _volume;
-            _audioSources.Enqueue(audioSource);
-        }    
+   
     }
 
     public void PlayWaterdropCollectedSound()
     {
-        if (_audioSources.Count <= 0) return;
-
-        AudioSource audioSource = _audioSources.Dequeue();
-        audioSource.Play();
-
-        StartCoroutine(WaitForAudioClipEnd(audioSource));
-
+        SoundManager.Instance.CreateSound()
+            .WithSoundData(_soundData)
+            .WithRandomPitch()
+            .Play();
     }
 
-    private IEnumerator WaitForAudioClipEnd(AudioSource audioSource)
-    {
-        while(audioSource.isPlaying)
-        {
-            yield return null;
-        }
-
-        _audioSources.Enqueue(audioSource);
-    }
 }
