@@ -7,7 +7,7 @@ public class SoundManager : PersistentSingleton<SoundManager>
 {
     IObjectPool<SoundEmitter> _soundEmitterPool;
     readonly List<SoundEmitter> _soundEmitters = new();
-    public readonly Dictionary<SoundData, int> Counts = new();
+    public readonly Queue<SoundEmitter> FrequentSoundEmitters = new();
 
     [SerializeField] SoundEmitter _soundEmitterPrefab;
     [SerializeField] bool _collectionCheck = true;
@@ -20,7 +20,7 @@ public class SoundManager : PersistentSingleton<SoundManager>
         InitializeSoundEmitterPool();
     }
 
-    public SoundBuilder CreateSound() => new SoundBuilder(this);
+    public SoundBuilder CreateSoundBuilder() => new SoundBuilder(this);
 
     public void ReturnToPool(SoundEmitter soundEmitter)
     {
@@ -29,7 +29,23 @@ public class SoundManager : PersistentSingleton<SoundManager>
 
     public bool CanPlaySound(SoundData soundData)
     {
-        return !Counts.TryGetValue(soundData, out int count) || count < _maxSoundInstances;
+        if (!soundData.FrequentSound) return true;
+
+        if (FrequentSoundEmitters.Count >= _maxSoundInstances && FrequentSoundEmitters.TryDequeue(out var soundEmitter))
+        {
+            try
+            {
+                soundEmitter.Stop();
+                return true;
+            }
+            catch
+            {
+                // Object Already released
+            }
+        }
+
+        return true;
+
     }
 
     private SoundEmitter CreateSoundEmitter()
@@ -55,11 +71,6 @@ public class SoundManager : PersistentSingleton<SoundManager>
 
     private void OnReturnToPool(SoundEmitter emitter)
     {
-        if(Counts.TryGetValue(emitter.SoundData, out int count))
-        {
-            Counts[emitter.SoundData] -= count > 0 ? 1 : 0;
-        }
-
         emitter.gameObject.SetActive(false);
 
         _soundEmitters.Remove(emitter);

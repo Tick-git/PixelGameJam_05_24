@@ -15,7 +15,7 @@ public class WaterdropSoundSystem : MonoBehaviour
 
     public void PlayWaterdropCollectedSound()
     {
-        SoundManager.Instance.CreateSound()
+        SoundManager.Instance.CreateSoundBuilder()
             .WithSoundData(_soundData)
             .WithRandomPitch()
             .Play();

@@ -1,4 +1,6 @@
-﻿public class SoundBuilder
+﻿using UnityEngine.Rendering;
+
+public class SoundBuilder
 {
     readonly SoundManager _soundManager;
     SoundData _soundData;
@@ -34,13 +36,9 @@
             soundEmitter.WithRandomPitch();
         }
 
-        if (_soundManager.Counts.TryGetValue(_soundData, out int count))
+        if(_soundData.FrequentSound)
         {
-            _soundManager.Counts[_soundData] = count + 1;
-        }
-        else
-        {
-            _soundManager.Counts.Add(_soundData, 1);
+           _soundManager.FrequentSoundEmitters.Enqueue(soundEmitter);
         }
 
         soundEmitter.Play();

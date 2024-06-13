@@ -12,4 +12,5 @@ public class SoundData : ScriptableObject
     public bool PlayOnAwake;
     public float Volume = 1f;
     public float Pitch = 1f;
+    public bool FrequentSound = false;
 }

@@ -26,6 +26,18 @@ public class SoundEmitter : MonoBehaviour
         _isPlayingCoroutine = StartCoroutine(WaitForSoundToEnd());
     }
 
+    public void Stop()
+    {
+        if(_isPlayingCoroutine != null)
+        {
+            StopCoroutine(_isPlayingCoroutine);
+            _isPlayingCoroutine = null;
+        }
+
+        _audioSource.Stop();
+        SoundManager.Instance.ReturnToPool(this);
+    }
+
     private IEnumerator WaitForSoundToEnd()
     {
         yield return new WaitWhile(() => _audioSource.isPlaying);
